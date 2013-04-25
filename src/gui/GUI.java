@@ -5,7 +5,11 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-
+/**
+ * MAIN CLASS
+ * @author bas11lbr
+ *
+ */
 public class GUI {
 
 	public static void main(String[] args) {
