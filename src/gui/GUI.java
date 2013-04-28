@@ -1,4 +1,6 @@
 package gui;
+import gui.userprofileview.UserProfileView;
+
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -18,10 +20,10 @@ public class GUI {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(600, 600));
 		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.add("Main View", new MainView());
-		tabbedPane.add("Statistics View", new StatisticsView());
-		tabbedPane.add("User Profile View", new UserProfileView());
-		tabbedPane.add("Bicycle View", new BicycleView());
+		tabbedPane.addTab("Main View", new MainView());
+		tabbedPane.addTab("User Profile View", new UserProfileView());
+		tabbedPane.addTab("Statistics View", new StatisticsView());
+		tabbedPane.addTab("Bicycle View", new BicycleView());
 		frame.add(tabbedPane);
 		frame.setVisible(true);
 	}
