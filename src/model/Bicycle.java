@@ -5,8 +5,14 @@ package model;
 */
 
 class Bicycle {  
-    public Bicycle(String bicycleID);
-    public boolean isInGarage();
-    public void setInGarage(boolean status);
-    public String getID();
+    public Bicycle(String bicycleID) {
+	}
+    public boolean isInGarage() {
+		return false;
+	}
+    public void setInGarage(boolean status) {
+	}
+    public String getID() {
+		return null;
+	}
 }
