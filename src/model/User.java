@@ -70,7 +70,7 @@ public class User {
         	
 			return birthDate;
 		}
-        public void setBirthDate() {
+        public void setBirthDate(String birthDate) {
         	this.birthDate = birthDate;
 		}
 }
