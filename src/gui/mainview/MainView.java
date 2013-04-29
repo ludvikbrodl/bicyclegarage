@@ -57,6 +57,9 @@ public class MainView extends JPanel {
 
 		add(nameSearchPanel);
 		add(buttons);
+		JPanel exitPanel = new JPanel();
+		exitPanel.add(new JButtonExit(tabbedPane));
+		add(exitPanel);
 	}
 
 	public void createUserProfileView() {
