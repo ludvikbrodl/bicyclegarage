@@ -4,7 +4,7 @@ package model;
 * @param args
 */
 
-class Bicycle {  
+public class Bicycle {  
     public Bicycle(String bicycleID) {
 	}
     public boolean isInGarage() {
