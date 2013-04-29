@@ -8,7 +8,7 @@ import model.User;
 * @param args
 */
 
-class Database {  
+public class Database {  
         public Database() {
 		}
         

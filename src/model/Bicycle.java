@@ -24,4 +24,11 @@ public class Bicycle {
     public String getID() {
 		return bicycleID;
 	}
+    
+    public boolean equals(Bicycle bicycle){
+    	if(bicycle.getID().equals(bicycleID)){
+    		return true;
+    	}
+    	else{return false;}
+    }
 }
