@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class JButtonCancel extends JButton implements ActionListener{
-	private JPanel panel;
+	private UserProfileView panel;
 	
-	public JButtonCancel(JPanel panel) {
+	public JButtonCancel(UserProfileView panel) {
 		super("Cancel");
 		addActionListener(this);
 		this.panel = panel;
@@ -17,6 +17,7 @@ public class JButtonCancel extends JButton implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		panel.removeMe();
 		System.out.println("Cancel");
 	}
 

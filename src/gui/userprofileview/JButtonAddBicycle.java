@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class JButtonAddBicycle extends JButton implements ActionListener{
-	private JPanel panel;
+	private UserProfileView panel;
 	
-	public JButtonAddBicycle(JPanel panel) {
+	public JButtonAddBicycle(UserProfileView panel) {
 		super("Add Bicycle");
 		addActionListener(this);
 		this.panel = panel;

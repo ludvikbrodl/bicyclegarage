@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class JButtonSave extends JButton implements ActionListener{
-	private JPanel panel;
+	private UserProfileView panel;
 	
-	public JButtonSave(JPanel panel) {
+	public JButtonSave(UserProfileView panel) {
 		super("Save");
 		addActionListener(this);
 		this.panel = panel;
