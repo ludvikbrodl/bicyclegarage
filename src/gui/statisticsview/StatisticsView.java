@@ -16,6 +16,7 @@ import persistence.Statistics;
 public class StatisticsView extends JPanel {
 	private static final String[] monthNames = {"Jan", "Feb", "Mar", "Apr", "May",
 		"Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	public static final String NAME = "Statistics";
 	public StatisticsView(Statistics statistics) {
 		super();
 		
@@ -24,7 +25,6 @@ public class StatisticsView extends JPanel {
 		int bicyclesTotal = statistics.getNumberOfBicycles();
 		int usersTotal = statistics.getNumberOfUsers();
 		List<Integer> entriesPerMonth = statistics.getNumberOfEntriesPerMonth();
-		entriesPerMonth.add(12);
 		JPanel labelPanel = new JPanel(new GridLayout(entriesPerMonth.size()+3, 0));
 		
 		Calendar calendar = new GregorianCalendar();

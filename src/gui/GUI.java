@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 import driver.BarcodePrinterTestDriver;
 
 import persistence.Database;
+import persistence.Statistics;
 
 import model.BarcodePrinter;
 import model.Bicycle;
@@ -31,8 +32,9 @@ public class GUI {
 		frame.setSize(new Dimension(600, 600));
 		
 		Database db = new Database();
+		Statistics stats = new Statistics();
 		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.addTab(MainView.NAME, new MainView(tabbedPane, db));
+		tabbedPane.addTab(MainView.NAME, new MainView(tabbedPane, db, stats));
 //		tabbedPane.addTab(UserProfileView.NAME, new UserProfileView());
 //		tabbedPane.addTab("Bicycle View", new BicycleView("dummy ID", new Database(), new BarcodePrinterTestDriver()));
 //		tabbedPane.addTab("Statistics View", new StatisticsView());

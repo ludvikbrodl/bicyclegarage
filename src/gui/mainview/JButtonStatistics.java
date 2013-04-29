@@ -18,6 +18,7 @@ public class JButtonStatistics extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("Statistics");
+		panel.createStatisticsView();
 	}
 
 }

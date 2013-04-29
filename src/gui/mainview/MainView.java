@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import persistence.Database;
+import persistence.Statistics;
 
 import model.Bicycle;
 
@@ -28,11 +29,13 @@ public class MainView extends JPanel {
 	private JTabbedPane tabbedPane;
 	private Database db;
 	private JTextField nameTextField;
-
-	public MainView(JTabbedPane tabbedPane, Database db) {
+	private Statistics stats;
+	
+	public MainView(JTabbedPane tabbedPane, Database db, Statistics stats) {
 		super();
 		this.tabbedPane = tabbedPane;
 		this.db = db;
+		this.stats = stats;
 
 		setLayout(new GridLayout(10, 0));
 
@@ -69,6 +72,10 @@ public class MainView extends JPanel {
 	}
 	public void createEmptyUserProfileView() {
 		tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(tabbedPane, "", db));
+	}
+
+	public void createStatisticsView() {
+		tabbedPane.addTab(StatisticsView.NAME, new StatisticsView(stats));
 	}
 
 }
