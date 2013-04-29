@@ -6,7 +6,7 @@ package model;
  * @param args
  */
 
-class Address {
+public class Address {
 	private int streetNumber;
 	private String streetName;
 	private int zipcode;
