@@ -75,7 +75,7 @@ public class MainView extends JPanel {
 	}
 
 	public void createStatisticsView() {
-		tabbedPane.addTab(StatisticsView.NAME, new StatisticsView(stats));
+		tabbedPane.addTab(StatisticsView.NAME, new StatisticsView(tabbedPane, stats));
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 import persistence.Statistics;
 
@@ -17,10 +18,10 @@ public class StatisticsView extends JPanel {
 	private static final String[] monthNames = {"Jan", "Feb", "Mar", "Apr", "May",
 		"Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 	public static final String NAME = "Statistics";
-	public StatisticsView(Statistics statistics) {
+	public StatisticsView(JTabbedPane tabbedPane, Statistics statistics) {
 		super();
 		
-		setLayout(new GridLayout(1, 0));
+		setLayout(new GridLayout(2, 0));
 		int bicyclesInGarage = statistics.getBicycleInGarage();
 		int bicyclesTotal = statistics.getNumberOfBicycles();
 		int usersTotal = statistics.getNumberOfUsers();
@@ -48,6 +49,8 @@ public class StatisticsView extends JPanel {
 		
 		JScrollPane scroll = new JScrollPane(labelPanel);
 		add(scroll);
-		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(new JButtonClose(tabbedPane));
+		add(buttonPanel);
 	}
 }
