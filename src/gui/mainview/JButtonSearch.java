@@ -18,6 +18,7 @@ public class JButtonSearch extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("Search for user");
+		panel.createUserProfileView();
 	}
 
 }

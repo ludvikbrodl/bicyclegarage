@@ -12,6 +12,7 @@ import java.awt.Component;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
@@ -56,16 +57,18 @@ public class MainView extends JPanel {
 	}
 
 	public void createUserProfileView() {
-		String name = nameTextField.toString();
+		String name = nameTextField.getText();
 		if (name != "") {
 			if (db.getUserByName(name) != null) {
 				tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(
 						tabbedPane, name, db));
+			} else {
+				JOptionPane.showMessageDialog(null, "the user "+name+" could not be found");
 			}
-		} else {
-			tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(
-					tabbedPane, "", db));
 		}
+	}
+	public void createEmptyUserProfileView() {
+		tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(tabbedPane, "", db));
 	}
 
 }

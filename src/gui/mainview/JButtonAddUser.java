@@ -18,7 +18,7 @@ public class JButtonAddUser extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("Add new user");
-		panel.createUserProfileView();
+		panel.createEmptyUserProfileView();
 	}
 
 }
