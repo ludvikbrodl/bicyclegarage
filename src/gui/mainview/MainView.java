@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import persistence.Database;
 import persistence.Statistics;
 
+import model.BarcodePrinter;
 import model.Bicycle;
 
 public class MainView extends JPanel {
@@ -30,13 +31,15 @@ public class MainView extends JPanel {
 	private Database db;
 	private JTextField nameTextField;
 	private Statistics stats;
-	
-	public MainView(JTabbedPane tabbedPane, Database db, Statistics stats) {
+	private BarcodePrinter printer;
+	public MainView(JTabbedPane tabbedPane, Database db,
+			Statistics stats, BarcodePrinter printer) {
 		super();
 		this.tabbedPane = tabbedPane;
 		this.db = db;
 		this.stats = stats;
-
+		this.printer = printer;
+		
 		setLayout(new GridLayout(10, 0));
 
 		// NameSearch Panel
@@ -66,15 +69,14 @@ public class MainView extends JPanel {
 		String name = nameTextField.getText();
 		if (name != "") {
 			if (db.getUserByName(name) != null) {
-				tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(
-						tabbedPane, name, db));
+				tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(tabbedPane, name, db, printer));
 			} else {
 				JOptionPane.showMessageDialog(null, "the user "+name+" could not be found");
 			}
 		}
 	}
 	public void createEmptyUserProfileView() {
-		tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(tabbedPane, "", db));
+		tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(tabbedPane, "", db, printer));
 	}
 
 	public void createStatisticsView() {

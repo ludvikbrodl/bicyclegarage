@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import model.Address;
+import model.BarcodePrinter;
 import model.User;
 
 import persistence.Database;
@@ -23,12 +24,12 @@ public class UserProfileView extends JPanel {
 	private JTextArea adressTextArea;
 	private JTextField birthdateTextField;
 	private JTextField pincodeTextField;
-
-	public UserProfileView(JTabbedPane tabbedPane, String name, Database db) {
+	private BarcodePrinter printer;
+	public UserProfileView(JTabbedPane tabbedPane, String name, Database db, BarcodePrinter printer) {
 		super();
 		setLayout(new GridLayout(10, 0));
 		this.tabbedPane = tabbedPane;
-		
+		this.printer = printer;
 		User user = db.getUserByName(name);
 		String adress = "";
 		String birthdate = "";
