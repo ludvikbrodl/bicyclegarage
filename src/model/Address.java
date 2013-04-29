@@ -5,14 +5,27 @@ package model;
 */
 
 class Address {  
-    public Adress(String streetName, int streetNumber, int zipcode, String cityName);
+    public Address(String streetName, int streetNumber, int zipcode, String cityName) {
+	}
     
-    public String getStreetName();
-    public void setStreetName();
-    public int getStreetNumber();
-    public void setStreetNumber(int streetNumber);
-    public int getZipcode();
-    public void setZipcode(int zipcode);
-    public String getCityName();
-    public void setCityName(String cityName);
+    public String getStreetName() {
+		return null;
+	}
+    public void setStreetName() {
+	}
+    public int getStreetNumber() {
+		return 0;
+	}
+    public void setStreetNumber(int streetNumber) {
+	}
+    public int getZipcode() {
+		return 0;
+	}
+    public void setZipcode(int zipcode) {
+	}
+    public String getCityName() {
+		return null;
+	}
+    public void setCityName(String cityName) {
+	}
 }

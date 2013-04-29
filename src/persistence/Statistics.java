@@ -17,8 +17,15 @@ public class Statistics {
 		currentMonth = new Date();
 		bicyclesPerMonth = new ArrayList<Integer>();
 	}
-    public void incrementNumberOfBicyclesInGarage();
-    public List<Integer> getNumberOfEntriesPerMonth();
-    public int getNumberOfBicycles();
-    public int getNumberOfUsers();
+    public void incrementNumberOfBicyclesInGarage() {
+	}
+    public List<Integer> getNumberOfEntriesPerMonth() {
+		return null;
+	}
+    public int getNumberOfBicycles() {
+		return 0;
+	}
+    public int getNumberOfUsers() {
+		return 0;
+	}
 }

@@ -9,18 +9,36 @@ import model.User;
 */
 
 class Database {  
-        public Database();
+        public Database() {
+		}
         
-        public boolean hasBicycleWithID(String bicycleID);
-        public Bicycle getBicycleByID(String bicycleID);
-        public void updateBicycleID(String bicycleID, Bicycle bicycle);
-        public void addBicycle(Bicycle bicycle);
-        public void removeBicycle(Bicycle bicycle);
-        public boolean hasUserWithPin(String pincode);
-        public User getUserByName(String name);
-        public void addUser(User user);
-        public void removeUser(User user);
-        public int getNumberOfBicycles();
-        public int getNumberOfUsers();
+        public boolean hasBicycleWithID(String bicycleID) {
+			return false;
+		}
+        public Bicycle getBicycleByID(String bicycleID) {
+			return null;
+		}
+        public void updateBicycleID(String bicycleID, Bicycle bicycle) {
+		}
+        public void addBicycle(Bicycle bicycle) {
+		}
+        public void removeBicycle(Bicycle bicycle) {
+		}
+        public boolean hasUserWithPin(String pincode) {
+			return false;
+		}
+        public User getUserByName(String name) {
+			return null;
+		}
+        public void addUser(User user) {
+		}
+        public void removeUser(User user) {
+		}
+        public int getNumberOfBicycles() {
+			return 0;
+		}
+        public int getNumberOfUsers() {
+			return 0;
+		}
         
 }
