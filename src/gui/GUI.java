@@ -27,7 +27,6 @@ public class GUI {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Bicycle Garage Manager");
-		// metod som sparar till databasen b�r anv�ndas ist�llet f�r close
 		frame.setSize(new Dimension(600, 600));
 		
 		BarcodePrinter printer = new BarcodePrinterTestDriver();
