@@ -14,58 +14,63 @@ import model.User;
 
 import persistence.Database;
 
-
 @SuppressWarnings("serial")
 public class UserProfileView extends JPanel {
-
 	public static final String NAME = "User Profile View";
 	private JTabbedPane tabbedPane;
 	private JTextField nameTextField;
 	private JTextArea adressTextArea;
 	private JTextField birthdateTextField;
 	private JTextField pincodeTextField;
+	private Database db;
 	private BarcodePrinter printer;
-	public UserProfileView(JTabbedPane tabbedPane, String name, Database db, BarcodePrinter printer) {
+
+	public UserProfileView(JTabbedPane tabbedPane, String name, Database db,
+			BarcodePrinter printer) {
 		super();
 		setLayout(new GridLayout(10, 0));
 		this.tabbedPane = tabbedPane;
 		this.printer = printer;
+		this.db = db;
 		User user = db.getUserByName(name);
-		String adress = "";
+		String adressString = "";
 		String birthdate = "";
 		String pincode = "";
 		if (user != null) {
 			Address address = user.getAddress();
-			adress = address.getStreetName() + address.getStreetNumber() + address.getZipcode() + address.getCityName() ;
+			adressString = address.getStreetName() + " " + address.getStreetNumber()
+					+ "\n" + address.getZipcode() + " " + address.getCityName();
+			birthdate = user.getBirthDate();
+			pincode = user.getPincode();
 		}
 		// Name Panel
 		JPanel namePanel = new JPanel();
-		nameTextField = new JTextField(30);
+		nameTextField = new JTextField(name, 30);
 		JLabel nameLabel = new JLabel("Name");
 		namePanel.add(nameLabel);
 		namePanel.add(nameTextField);
 
 		// Adress Panel
 		JPanel adressPanel = new JPanel();
-		adressTextArea = new JTextArea(3, 30);
+		adressTextArea = new JTextArea(adressString, 3, 30);
 		JLabel adressLabel = new JLabel("Adress");
 		adressPanel.add(adressLabel);
 		adressPanel.add(adressTextArea);
 
 		// Birthdate Panel
 		JPanel birthdatePanel = new JPanel();
-		birthdateTextField = new JTextField(30);
+		birthdateTextField = new JTextField(birthdate, 30);
 		JLabel birthdateLabel = new JLabel("Birthdate");
 		birthdatePanel.add(birthdateLabel);
 		birthdatePanel.add(birthdateTextField);
 
 		// Pincode Panel
 		JPanel pincodePanel = new JPanel();
-		pincodeTextField = new JTextField(10);
+		pincodeTextField = new JTextField(pincode, 10);
 		JLabel pincodeLabel = new JLabel("Pin Code");
 		pincodePanel.add(pincodeLabel);
 		pincodePanel.add(pincodeTextField);
-		
+
 		// Button Panel
 		JPanel buttons = new JPanel();
 		JButtonAddBicycle addBicycle = new JButtonAddBicycle(this);
@@ -76,16 +81,20 @@ public class UserProfileView extends JPanel {
 		buttons.add(removeUser);
 		buttons.add(save);
 		buttons.add(cancel);
-		
+
 		add(namePanel);
 		add(adressPanel);
 		add(birthdatePanel);
 		add(pincodePanel);
 		add(buttons);
 	}
-	
+
 	public void removeMe() {
 		tabbedPane.remove(this);
 	}
 	
+	public void saveUserToDatabase() {
+		
+	}
+
 }

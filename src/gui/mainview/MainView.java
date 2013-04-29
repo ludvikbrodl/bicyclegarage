@@ -71,7 +71,7 @@ public class MainView extends JPanel {
 			if (db.getUserByName(name) != null) {
 				tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(tabbedPane, name, db, printer));
 			} else {
-				JOptionPane.showMessageDialog(null, "the user "+name+" could not be found");
+				JOptionPane.showMessageDialog(null, "the user '"+name+"' could not be found");
 			}
 		}
 	}
