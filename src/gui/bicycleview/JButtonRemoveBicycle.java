@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.sql.DatabaseMetaData;
 
 import javax.swing.JButton;
+
+import model.Bicycle;
 import persistence.Database;
 public class JButtonRemoveBicycle extends JButton implements ActionListener {
 	private String bicycleID;
@@ -16,6 +18,7 @@ public class JButtonRemoveBicycle extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("Removing bicycle...");
-		db.
+		Bicycle bicycle = db.getBicycleByID(bicycleID);
+		db.removeBicycle(bicycle);
 	}
 }
