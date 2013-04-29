@@ -20,14 +20,23 @@ public class Statistics {
 		bicyclesPerMonth = new ArrayList<Integer>();
 		DB = new Database();
 	}
+	public void incrementBicyclesInGarage(){
+		bicyclesInGarage++;
+	}
 	
-    public void incrementNumberOfBicyclesInGarage() {
-    	if(date.getDate() == 0 && lastMonth ==11){
-    		
+    public void incrementNumberOfBicyclesThisMonth() {
+    	if(date.getMonth() == 0 && lastMonth ==11){
+    		lastMonth = 0;
+    		bicyclesPerMonth.add(entriesThisMonth);
+    		entriesThisMonth = 0;
+    	}else if (date.getMonth() > lastMonth){
+    		lastMonth = date.getMonth();
+    		bicyclesPerMonth.add(entriesThisMonth);
+    		entriesThisMonth = 0;
     	}
  
     	
-    	bicyclesInGarage ++;
+    	entriesThisMonth ++;
     	
 	}
     public List<Integer> getNumberOfEntriesPerMonth() {
