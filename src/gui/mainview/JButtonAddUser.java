@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class JButtonAddUser extends JButton implements ActionListener{
-	private JPanel panel;
+	private MainView panel;
 	
-	public JButtonAddUser(JPanel panel) {
+	public JButtonAddUser(MainView panel) {
 		super("Add new user");
 		addActionListener(this);
 		this.panel = panel;
@@ -18,6 +18,7 @@ public class JButtonAddUser extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("Add new user");
+		panel.createUserProfileView();
 	}
 
 }

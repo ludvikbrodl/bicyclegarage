@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class JButtonSearch extends JButton implements ActionListener{
-	private JPanel panel;
+	private MainView panel;
 	
-	public JButtonSearch(JPanel panel) {
+	public JButtonSearch(MainView panel) {
 		super("Search for user");
 		addActionListener(this);
 		this.panel = panel;

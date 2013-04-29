@@ -17,26 +17,31 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import persistence.Database;
+
 import model.Bicycle;
 
 public class MainView extends JPanel {
 
 	public static final String NAME = "Main View";
 	private JTabbedPane tabbedPane;
+	private Database db;
+	private JTextField nameTextField;
 
-	public MainView(JTabbedPane tabbedPane) {
+	public MainView(JTabbedPane tabbedPane, Database db) {
 		super();
 		this.tabbedPane = tabbedPane;
+		this.db = db;
 
 		setLayout(new GridLayout(10, 0));
-		
+
 		// NameSearch Panel
 		JPanel nameSearchPanel = new JPanel();
-		JTextField nameTextField = new JTextField(30);
+		nameTextField = new JTextField(30);
 		JLabel nameLabel = new JLabel("Name to search for: ");
 		nameSearchPanel.add(nameLabel);
 		nameSearchPanel.add(nameTextField);
-		
+
 		// Button Panel
 		JPanel buttons = new JPanel();
 		JButtonSearch userSearch = new JButtonSearch(this);
@@ -45,9 +50,22 @@ public class MainView extends JPanel {
 		buttons.add(userSearch);
 		buttons.add(addUser);
 		buttons.add(statistics);
-		
+
 		add(nameSearchPanel);
 		add(buttons);
+	}
+
+	public void createUserProfileView() {
+		String name = nameTextField.toString();
+		if (name != "") {
+			if (db.getUserByName(name) != null) {
+				tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(
+						tabbedPane, name, db));
+			}
+		} else {
+			tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(
+					tabbedPane, "", db));
+		}
 	}
 
 }

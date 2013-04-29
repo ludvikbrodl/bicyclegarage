@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class JButtonRemoveUser extends JButton implements ActionListener{
-	private JPanel panel;
+	private UserProfileView panel;
 	
-	public JButtonRemoveUser(JPanel panel) {
+	public JButtonRemoveUser(UserProfileView panel) {
 		super("Remove User");
 		addActionListener(this);
 		this.panel = panel;

@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class JButtonStatistics extends JButton implements ActionListener{
-	private JPanel panel;
+	private MainView panel;
 	
-	public JButtonStatistics(JPanel panel) {
+	public JButtonStatistics(MainView panel) {
 		super("Statistics");
 		addActionListener(this);
 		this.panel = panel;
