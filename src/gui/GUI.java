@@ -24,12 +24,19 @@ public class GUI {
 		// metod som sparar till databasen b�r anv�ndas ist�llet f�r close
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(600, 600));
+		
 		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.addTab("Main View", new MainView());
-		tabbedPane.addTab("User Profile View", new UserProfileView());
-		tabbedPane.addTab("Statistics View", new StatisticsView());
+		tabbedPane.addTab(MainView.NAME, new MainView(tabbedPane));
+		tabbedPane.addTab(UserProfileView.NAME, new UserProfileView());
 		tabbedPane.addTab("Bicycle View", new BicycleView(new Bicycle("dummyID")));
+		tabbedPane.addTab("Statistics View", new StatisticsView());
+		
+		tabbedPane.setEnabledAt(1, false);
+		tabbedPane.setEnabledAt(2, false);
+		tabbedPane.setEnabledAt(3, false);
+		
 		frame.add(tabbedPane);
 		frame.setVisible(true);
 	}
+
 }

@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class UserProfileView extends JPanel {
 
+	public static final String NAME = "User Profile View";
+
 	public UserProfileView() {
 		super();
 		setLayout(new GridLayout(10, 0));
