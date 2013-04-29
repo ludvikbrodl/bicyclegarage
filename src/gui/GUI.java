@@ -28,15 +28,15 @@ public class GUI {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Bicycle Garage Manager");
 		// metod som sparar till databasen b�r anv�ndas ist�llet f�r close
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(600, 600));
 		
 		BarcodePrinter printer = new BarcodePrinterTestDriver();
 		Database db = new Database();
 		Statistics stats = new Statistics();
 		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.addTab(MainView.NAME, new MainView(tabbedPane, db, stats, printer));
-		
+		MainView mainview = new MainView(tabbedPane, db, stats, printer);
+		tabbedPane.addTab(MainView.NAME, mainview);
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.add(tabbedPane);
 		frame.setVisible(true);
 	}

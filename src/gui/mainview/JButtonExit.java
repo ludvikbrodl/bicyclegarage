@@ -8,18 +8,18 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class JButtonExit extends JButton implements ActionListener{
-	private JTabbedPane pane;
+	private MainView panel;
 	
-	public JButtonExit(JTabbedPane pane) {
+	public JButtonExit(MainView panel) {
 		super("Exit");
 		addActionListener(this);
-		this.pane = pane;
+		this.panel = panel;
 		
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("Close");
-		System.exit(0);
+		panel.shutdownGUI();
 	}
 
 }

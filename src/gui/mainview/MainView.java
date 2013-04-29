@@ -61,7 +61,7 @@ public class MainView extends JPanel {
 		add(nameSearchPanel);
 		add(buttons);
 		JPanel exitPanel = new JPanel();
-		exitPanel.add(new JButtonExit(tabbedPane));
+		exitPanel.add(new JButtonExit(this));
 		add(exitPanel);
 	}
 
@@ -81,6 +81,10 @@ public class MainView extends JPanel {
 
 	public void createStatisticsView() {
 		tabbedPane.addTab(StatisticsView.NAME, new StatisticsView(tabbedPane, stats));
+	}
+
+	public void shutdownGUI() {
+		System.exit(0);
 	}
 
 }
