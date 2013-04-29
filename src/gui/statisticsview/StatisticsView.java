@@ -1,4 +1,4 @@
-package gui;
+package gui.statisticsview;
 import java.awt.Component;
 
 import javax.swing.JPanel;

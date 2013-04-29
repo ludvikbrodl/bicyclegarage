@@ -1,4 +1,7 @@
 package gui;
+import gui.bicycleview.BicycleView;
+import gui.mainview.MainView;
+import gui.statisticsview.StatisticsView;
 import gui.userprofileview.UserProfileView;
 
 import java.awt.Dimension;
@@ -16,7 +19,7 @@ public class GUI {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Bicycle Garage Manager");
-		// metod som sparar till databasen bör användas istället för close
+		// metod som sparar till databasen bï¿½r anvï¿½ndas istï¿½llet fï¿½r close
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(600, 600));
 		JTabbedPane tabbedPane = new JTabbedPane();
