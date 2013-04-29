@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
+import model.Bicycle;
 /**
  * MAIN CLASS
  * @author bas11lbr
@@ -26,7 +28,7 @@ public class GUI {
 		tabbedPane.addTab("Main View", new MainView());
 		tabbedPane.addTab("User Profile View", new UserProfileView());
 		tabbedPane.addTab("Statistics View", new StatisticsView());
-		tabbedPane.addTab("Bicycle View", new BicycleView());
+		tabbedPane.addTab("Bicycle View", new BicycleView(new Bicycle("dummyID")));
 		frame.add(tabbedPane);
 		frame.setVisible(true);
 	}
