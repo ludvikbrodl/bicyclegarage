@@ -1,4 +1,7 @@
-package model;
+package persistence;
+
+import model.Bicycle;
+import model.User;
 
 /**
 * Main-method used to start the application.

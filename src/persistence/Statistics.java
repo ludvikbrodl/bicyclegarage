@@ -1,4 +1,4 @@
-package model;
+package persistence;
 
 import java.util.Date;
 import java.util.ArrayList;
