@@ -1,5 +1,9 @@
 package persistence;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import model.Bicycle;
 import model.User;
 
@@ -9,20 +13,23 @@ import model.User;
 */
 
 public class Database {  
+	private Map<String, Bicycle> bicycles;
         public Database() {
+        	bicycles = new ConcurrentHashMap<String, Bicycle>();
 		}
-        
         public boolean hasBicycleWithID(String bicycleID) {
 			return false;
 		}
         public Bicycle getBicycleByID(String bicycleID) {
-			return null;
+			return bicycles.get(bicycleID);
 		}
         public void updateBicycleID(String bicycleID, Bicycle bicycle) {
 		}
         public void addBicycle(Bicycle bicycle) {
+        	bicycles.put(bicycle.getID(), bicycle);
 		}
         public void removeBicycle(Bicycle bicycle) {
+        	bicycles.remove(bicycle.getID());
 		}
         public boolean hasUserWithPin(String pincode) {
 			return false;
@@ -37,7 +44,7 @@ public class Database {
         public void removeUser(User user) {
 		}
         public int getNumberOfBicycles() {
-			return 0;
+			return bicycles.size();
 		}
         public int getNumberOfUsers() {
 			return 0;

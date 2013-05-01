@@ -134,16 +134,22 @@ public class DatabaseTest {
 	
 	@Test
 	public void testConcurrentAccess() {
-		for (int i = 0; i < 20; i++) {
-			(new DBWriter()).start();
+		for (int i = 0; i < 100; i++) {
+			(new DBWriter(i+1)).start();
 		}
 		assertEquals(0,db.getNumberOfBicycles());
 	}
 	
 	private class DBWriter extends Thread {
+		int tc;
+		DBWriter(int tc){
+			super();
+			this.tc = tc;
+		}
 		public void run() {
 			db.addBicycle(new Bicycle("id"));
 			db.removeBicycle(db.getBicycleByID("id"));
+			assertEquals(0,db.getNumberOfBicycles());
 		}
 	}
 }
