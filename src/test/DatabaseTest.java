@@ -5,9 +5,13 @@ package test;
 
 import static org.junit.Assert.*;
 
+import model.Bicycle;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import persistence.Database;
 
 /**
  * @author axel
@@ -15,11 +19,13 @@ import org.junit.Test;
  */
 public class DatabaseTest {
 
+	private Database db;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		db = new Database();
 	}
 
 	/**
@@ -27,6 +33,7 @@ public class DatabaseTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		db = null;
 	}
 
 	/**
@@ -124,5 +131,19 @@ public class DatabaseTest {
 	public void testGetNumberOfUsers() {
 		fail("Not yet implemented");
 	}
-
+	
+	@Test
+	public void testConcurrentAccess() {
+		for (int i = 0; i < 20; i++) {
+			(new DBWriter()).start();
+		}
+		assertEquals(0,db.getNumberOfBicycles());
+	}
+	
+	private class DBWriter extends Thread {
+		public void run() {
+			db.addBicycle(new Bicycle("id"));
+			db.removeBicycle(db.getBicycleByID("id"));
+		}
+	}
 }
