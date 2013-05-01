@@ -64,12 +64,17 @@ public class MainView extends JPanel {
 		exitPanel.add(new JButtonExit(this));
 		add(exitPanel);
 	}
-
+	
+	public void setFocusToNewTab() {
+		tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
+	}
+	
 	public void createUserProfileView() {
 		String name = nameTextField.getText();
 		if (name != "") {
 			if (db.getUserByName(name) != null) {
 				tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(tabbedPane, name, db, printer));
+				setFocusToNewTab();
 			} else {
 				JOptionPane.showMessageDialog(null, "the user '"+name+"' could not be found");
 			}
@@ -77,10 +82,12 @@ public class MainView extends JPanel {
 	}
 	public void createEmptyUserProfileView() {
 		tabbedPane.addTab(UserProfileView.NAME, new UserProfileView(tabbedPane, "", db, printer));
+		setFocusToNewTab();
 	}
 
 	public void createStatisticsView() {
 		tabbedPane.addTab(StatisticsView.NAME, new StatisticsView(tabbedPane, stats));
+		setFocusToNewTab();
 	}
 
 	public void shutdownGUI() {
