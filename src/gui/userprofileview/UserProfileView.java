@@ -24,6 +24,7 @@ public class UserProfileView extends JPanel {
 	private JTextField pincodeTextField;
 	private Database db;
 	private BarcodePrinter printer;
+	private String username;
 
 	public UserProfileView(JTabbedPane tabbedPane, String name, Database db,
 			BarcodePrinter printer) {
@@ -32,6 +33,7 @@ public class UserProfileView extends JPanel {
 		this.tabbedPane = tabbedPane;
 		this.printer = printer;
 		this.db = db;
+		this.username = name;
 		User user = db.getUserByName(name);
 		String adressString = "";
 		String birthdate = "";
@@ -71,6 +73,8 @@ public class UserProfileView extends JPanel {
 		pincodePanel.add(pincodeLabel);
 		pincodePanel.add(pincodeTextField);
 
+		// List of bicycles
+		
 		// Button Panel
 		JPanel buttons = new JPanel();
 		JButtonAddBicycle addBicycle = new JButtonAddBicycle(this);
@@ -94,7 +98,12 @@ public class UserProfileView extends JPanel {
 	}
 	
 	public void saveUserToDatabase() {
+		User user = db.getUserByName(username);
 		
+		//write values of all input fields to corresponding attributes in User
+		//if new pincode != old pincode, call updateUserPincode() in db
+		
+		removeMe();
 	}
 
 }

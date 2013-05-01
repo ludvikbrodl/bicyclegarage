@@ -30,6 +30,8 @@ public class Database {
         public User getUserByName(String name) {
 			return null;
 		}
+        public void updateUserPincode() {
+        }
         public void addUser(User user) {
 		}
         public void removeUser(User user) {

@@ -17,7 +17,7 @@ public class JButtonSave extends JButton implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("Save");
+		panel.saveUserToDatabase();
 	}
 
 }
