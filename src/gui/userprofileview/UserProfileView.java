@@ -99,6 +99,13 @@ public class UserProfileView extends JPanel {
 	
 	public void saveUserToDatabase() {
 		User user = db.getUserByName(username);
+		user.setAddress(adressTextArea.toString());
+		user.setBirthDate(birthdateTextField.toString());
+		user.setName(nameTextField.toString());
+		String newPincode = pincodeTextField.toString();
+		user.setPincode(newPincode)
+		db.updateUserPincode(user.getPincode(), newPincode);
+		
 		
 		//write values of all input fields to corresponding attributes in User
 		//if new pincode != old pincode, call updateUserPincode() in db
