@@ -25,6 +25,8 @@ public class Bicycle {
 		return bicycleID;
 	}
     
+ 
+    
     public boolean equals(Bicycle bicycle){
     	if(bicycle.getID().equals(bicycleID)){
     		return true;
