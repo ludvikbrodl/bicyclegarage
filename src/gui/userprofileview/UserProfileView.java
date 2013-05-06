@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import model.BarcodePrinter;
+import model.Bicycle;
 import model.User;
 
 import persistence.Database;
@@ -39,10 +40,17 @@ public class UserProfileView extends JPanel {
 		String address = "";
 		String birthdate = "";
 		String pincode = "";
+		JPanel bicycleButtons = new JPanel();
+		
 		if (user != null) {
 			address = user.getAddress();
 			birthdate = user.getBirthDate();
 			pincode = user.getPincode();
+			
+			// List of bicycles
+			for (String s : user.getBicycleIDs()) {
+				bicycleButtons.add(new JButtonBicycle(this, db.getBicycleByID(s)));
+			}
 		}
 		// Name Panel
 		JPanel namePanel = new JPanel();
@@ -72,11 +80,7 @@ public class UserProfileView extends JPanel {
 		pincodePanel.add(pincodeLabel);
 		pincodePanel.add(pincodeTextField);
 
-		// List of bicycles
-		JPanel bicycleButtons = new JPanel();
-		for (String s : user.getBicycleIDs()) {
-			bicycleButtons.add(new JButtonBicycle(this, db.getBicycleByID(s);));
-		}
+	
 		
 		// Button Panel
 		JPanel buttons = new JPanel();
@@ -126,5 +130,9 @@ public class UserProfileView extends JPanel {
 	public void createBicycleView(String bicycleID) {
 		tabbedPane.add(new BicycleView(bicycleID, db, printer));
 	}
-
+	
+	public void createNewBicycleView() {
+		Bicycle bicycle = db.newBicycle(db.getUserByName(username));
+		tabbedPane.add(new BicycleView(bicycle.getID(), db, printer));
+	}
 }

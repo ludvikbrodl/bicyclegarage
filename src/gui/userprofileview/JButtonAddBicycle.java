@@ -17,6 +17,7 @@ public class JButtonAddBicycle extends JButton implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		panel.createNewBicycleView();
 		System.out.println("Add Bicycle");
 	}
 
