@@ -1,6 +1,7 @@
 package model;
 
 public interface BicycleGarageManager {
+	public static final int PINCODE_SIZE = 6;
 	/* Register hardware so that BicycleGarageManager
 	 * knows which drivers to access. 
 	 */
