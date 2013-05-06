@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import model.BarcodeReader;
 import model.LundBicycleGarageManager;
+import model.PinCodeTerminal;
 import persistence.Database;
 import driver.*;
 
@@ -18,12 +21,12 @@ public class LundBicycleGarageManagerTest {
 	public void setUp() throws Exception {
 		Db = new Database();
 		LBGM = new LundBicycleGarageManager(Db);
-		BarcodeReaderEntryTestDriver barcodeEntry = new BarcodeReaderEntryTestDriver();
+		BarcodeReader barcodeEntry = new BarcodeReaderEntryTestDriver();
 		BarcodePrinterTestDriver barcodePrint = new BarcodePrinterTestDriver();
-		BarcodeReaderExitTestDriver barcodeExit = new BarcodeReaderExitTestDriver();
-	/**	BarcodeReaderTestDriver BarcodeRead = new BarcodeReaderTestDriver();*/
-	/**	ElectronicLockTestDriver Electroniklock = new ElectronicLockTestDriver(Entry);*/
-		PinCodeTerminalTestDriver Pincode = new PinCodeTerminalTestDriver();
+		BarcodeReader barcodeExit = new BarcodeReaderExitTestDriver();
+	/**	BarcodeReader barcodeRead = new BarcodeReaderTestDriver();*/
+	/**	ElectronicLock electronikLock = new ElectronicLockTestDriver(Entry);*/
+		PinCodeTerminal pincode = new PinCodeTerminalTestDriver();
 		
 	}
 
@@ -35,12 +38,16 @@ public class LundBicycleGarageManagerTest {
 
 	@Test
 	public void testRegisterHardwareDrivers() {
-		fail("Not yet implemented");
+		assertEquals("random text", "svar", "metod");
+		assertTrue("random text", true );/**metod elelr variabel som sak var true*/
+		/**assertSame(String, expected, actual);*/
+		/**assertNull([message], object)*/
 	}
 
 	@Test
 	public void testEntryBarcode() {
-		fail("Not yet implemented");
+		assertEquals("random text", "svar", "metod");
+		
 	}
 
 	@Test
