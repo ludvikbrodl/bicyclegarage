@@ -25,8 +25,7 @@ public class BicycleView extends JPanel {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(new JButtonPrint(bicycleID, printer));
 		buttonPanel.add(new JButtonRemoveBicycle(bicycleID, db));
-		
-		
+			
 		add(bicycleIDPanel);
 		add(buttonPanel);
 	}

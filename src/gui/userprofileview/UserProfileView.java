@@ -26,7 +26,7 @@ public class UserProfileView extends JPanel {
 	private JTextField pincodeTextField;
 	private Database db;
 	private BarcodePrinter printer;
-	private String username;
+	private User user;
 
 	public UserProfileView(JTabbedPane tabbedPane, String name, Database db,
 			BarcodePrinter printer) {
@@ -35,8 +35,7 @@ public class UserProfileView extends JPanel {
 		this.tabbedPane = tabbedPane;
 		this.printer = printer;
 		this.db = db;
-		this.username = name;
-		User user = db.getUserByName(name);
+		user = db.getUserByName(name);
 		String address = "";
 		String birthdate = "";
 		String pincode = "";
@@ -51,6 +50,8 @@ public class UserProfileView extends JPanel {
 			for (String s : user.getBicycleIDs()) {
 				bicycleButtons.add(new JButtonBicycle(this, db.getBicycleByID(s)));
 			}
+		} else {
+			user = new User("","","","");
 		}
 		// Name Panel
 		JPanel namePanel = new JPanel();
@@ -106,7 +107,6 @@ public class UserProfileView extends JPanel {
 	}
 	
 	public void saveUserToDatabase() {
-		User user = db.getUserByName(username);
 		String adress = adressTextArea.toString();
 		String birthDate = birthdateTextField.toString();
 		String name = nameTextField.toString();
@@ -132,7 +132,7 @@ public class UserProfileView extends JPanel {
 	}
 	
 	public void createNewBicycleView() {
-		Bicycle bicycle = db.newBicycle(db.getUserByName(username));
+		Bicycle bicycle = db.newBicycle(user);
 		tabbedPane.add(new BicycleView(bicycle.getID(), db, printer));
 	}
 }
