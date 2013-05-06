@@ -5,6 +5,7 @@ import gui.bicycleview.BicycleView;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 
 import model.BarcodePrinter;
 import model.Bicycle;
+import model.BicycleGarageManager;
 import model.User;
 
 import persistence.Database;
@@ -107,10 +109,13 @@ public class UserProfileView extends JPanel {
 	}
 	
 	public void saveUserToDatabase() {
+		String newPincode = pincodeTextField.toString();
+		if (newPincode.length() != BicycleGarageManager.PINCODE_SIZE || newPincode.matches("[0-9]+")) {
+			JOptionPane.showMessageDialog(null, "Pincode must be 6 digits long and contain only integers");
+		}
 		String adress = adressTextArea.toString();
 		String birthDate = birthdateTextField.toString();
 		String name = nameTextField.toString();
-		String newPincode = pincodeTextField.toString();
 		if (adress != user.getAddress()) {
 			user.setAddress(adress);
 		}
