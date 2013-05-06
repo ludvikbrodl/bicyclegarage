@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.swing.JOptionPane;
+
 import model.Bicycle;
 import model.User;
 
@@ -17,16 +19,17 @@ public class Database {
 	private final int MAX_USERS = 20000;
 	private Map<String, User> users;
 	private Map<String, Bicycle> bicycles;
-	private int nbrUsers;
 	
 	
         public Database() {
-        	bicycles = new ConcurrentHashMap<String, Bicycle>();
-        	users = new ConcurrentHashMap<String, User>();
-        	nbrUsers = 0;
+        	bicycles = new HashMap<String, Bicycle>();
+        	users = new HashMap<String, User>();
 		}
         
         public boolean hasBicycleWithID(String bicycleID) {
+        	if(users.containsKey(bicycleID)){
+        		return true;
+        	}
 			return false;
 		}
         
@@ -34,8 +37,6 @@ public class Database {
 			return bicycles.get(bicycleID);
 		}
         
-        public void updateBicycleID(String newBicycleID, String oldBicycleID) {
-		}
         
         public void addBicycle(Bicycle bicycle) {
         	bicycles.put(bicycle.getID(), bicycle);
@@ -49,16 +50,25 @@ public class Database {
 		}
         
         public User getUserByName(String name) {
+        	
 			return null;
 		}
         
         public void updateUserPincode() {
+        	
         }
         
         public void addUser(User user) {
+        	if(getNumberOfUsers() >= MAX_USERS){
+        		JOptionPane.showMessageDialog(null, "Max amount of users has been registerd. Contact administration.");
+        	}
+        	else{
+        		
+        	}
 		}
         
         public void removeUser(User user) {
+        	users.remove(user.getName());
 		}
         
         public int getNumberOfBicycles() {
@@ -66,7 +76,7 @@ public class Database {
 		}
         
         public int getNumberOfUsers() {
-			return nbrUsers;
+			return users.size();
 		}
         
         

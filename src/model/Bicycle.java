@@ -25,9 +25,7 @@ public class Bicycle {
 		return bicycleID;
 	}
     
-    public void setID(String newID){
-    	bicycleID = newID;
-    }
+ 
     
     public boolean equals(Bicycle bicycle){
     	if(bicycle.getID().equals(bicycleID)){
