@@ -128,9 +128,10 @@ public class UserProfileView extends JPanel {
 			}
 			if (newPincode != user.getPincode()) {
 				user.setPincode(newPincode);
-				db.updateUserPincode(user.getPincode(), newPincode);
 			}
-			db.addUser(user);
+			if (!db.hasUserWithPin(newPincode)) {
+				db.addUser(user);
+			}	
 			removeMe();
 		}
 
