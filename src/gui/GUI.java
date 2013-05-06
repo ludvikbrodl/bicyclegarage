@@ -31,7 +31,7 @@ public class GUI {
 		
 		BarcodePrinter printer = new BarcodePrinterTestDriver();
 		Database db = new Database();
-		Statistics stats = new Statistics();
+		Statistics stats = new Statistics(db);
 		JTabbedPane tabbedPane = new JTabbedPane();
 		MainView mainview = new MainView(tabbedPane, db, stats, printer);
 		tabbedPane.addTab(MainView.NAME, mainview);
