@@ -6,34 +6,37 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.BarcodePrinter;
 import model.BarcodeReader;
 import model.LundBicycleGarageManager;
 import model.PinCodeTerminal;
 import persistence.Database;
+import persistence.Statistics;
 import driver.*;
 
 public class LundBicycleGarageManagerTest {
-	private Database Db;
-	private LundBicycleGarageManager LBGM;
+	private Database db;
+	private LundBicycleGarageManager garageManager;
 	
 
 	@Before
 	public void setUp() throws Exception {
-		Db = new Database();
-		LBGM = new LundBicycleGarageManager(Db);
+		db = new Database();
+		Statistics statistics = new Statistics(db);
+		garageManager = new LundBicycleGarageManager(db, statistics);
 		BarcodeReader barcodeEntry = new BarcodeReaderEntryTestDriver();
-		BarcodePrinterTestDriver barcodePrint = new BarcodePrinterTestDriver();
+		BarcodePrinter barcodePrint = new BarcodePrinterTestDriver();
 		BarcodeReader barcodeExit = new BarcodeReaderExitTestDriver();
 	/**	BarcodeReader barcodeRead = new BarcodeReaderTestDriver();*/
 	/**	ElectronicLock electronikLock = new ElectronicLockTestDriver(Entry);*/
-		PinCodeTerminal pincode = new PinCodeTerminalTestDriver();
+		PinCodeTerminal pincodeTerminal = new PinCodeTerminalTestDriver();
 		
 	}
 
 	@After	
 	public void tearDown() throws Exception {
-		Db = null;
-		LBGM = null;
+		db = null;
+		garageManager = null;
 	}
 
 	@Test
