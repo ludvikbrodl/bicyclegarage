@@ -1,5 +1,7 @@
 package gui.userprofileview;
 
+import gui.bicycleview.BicycleView;
+
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -38,7 +40,7 @@ public class UserProfileView extends JPanel {
 		String birthdate = "";
 		String pincode = "";
 		if (user != null) {
-			 address = user.getAddress();
+			address = user.getAddress();
 			birthdate = user.getBirthDate();
 			pincode = user.getPincode();
 		}
@@ -71,6 +73,10 @@ public class UserProfileView extends JPanel {
 		pincodePanel.add(pincodeTextField);
 
 		// List of bicycles
+		JPanel bicycleButtons = new JPanel();
+		for (String s : user.getBicycleIDs()) {
+			bicycleButtons.add(new JButtonBicycle(this, db.getBicycleByID(s);));
+		}
 		
 		// Button Panel
 		JPanel buttons = new JPanel();
@@ -87,6 +93,7 @@ public class UserProfileView extends JPanel {
 		add(adressPanel);
 		add(birthdatePanel);
 		add(pincodePanel);
+		add(bicycleButtons);
 		add(buttons);
 	}
 
@@ -96,18 +103,28 @@ public class UserProfileView extends JPanel {
 	
 	public void saveUserToDatabase() {
 		User user = db.getUserByName(username);
-		user.setAddress(adressTextArea.toString());
-		user.setBirthDate(birthdateTextField.toString());
-		user.setName(nameTextField.toString());
+		String adress = adressTextArea.toString();
+		String birthDate = birthdateTextField.toString();
+		String name = nameTextField.toString();
 		String newPincode = pincodeTextField.toString();
-		user.setPincode(newPincode)
-		db.updateUserPincode(user.getPincode(), newPincode);
-		
-		
-		//write values of all input fields to corresponding attributes in User
-		//if new pincode != old pincode, call updateUserPincode() in db
-		
+		if (adress != user.getAddress()) {
+			user.setAddress(adress);
+		}
+		if (birthDate != user.getBirthDate()) {
+			user.setBirthDate(birthDate);
+		}
+		if (name != user.getName()) {
+			user.setName(name);
+		}
+		if (newPincode != user.getPincode()) {
+			user.setPincode(newPincode);
+			db.updateUserPincode(user.getPincode(), newPincode);
+		}				
 		removeMe();
+	}
+
+	public void createBicycleView(String bicycleID) {
+		tabbedPane.add(new BicycleView(bicycleID, db, printer));
 	}
 
 }
