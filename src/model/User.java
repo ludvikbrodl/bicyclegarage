@@ -13,10 +13,10 @@ public class User {
 	private String pincode;
 	private String name;
 	private String birthDate;
-	private Address address;
+	private String address;
 	private List<Bicycle> bicycleList;
 	
-        public User(String pincode, String name, String birthDate, Address address) {
+        public User(String pincode, String name, String birthDate, String address) {
         	this. pincode = pincode;
         	this.name = name;
         	this.birthDate = birthDate;
@@ -58,12 +58,12 @@ public class User {
         	this.name = name;
         	
 		}
-        public Address getAddress() {
+        public String getAddress() {
         	
 			return address;
 		}
         
-        public void setAddress(Address address) {
+        public void setAddress(String address) {
         	this.address = address;
 		}
         public String getBirthDate() {
