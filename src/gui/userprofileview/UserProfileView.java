@@ -8,7 +8,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import model.Address;
 import model.BarcodePrinter;
 import model.User;
 
@@ -35,13 +34,11 @@ public class UserProfileView extends JPanel {
 		this.db = db;
 		this.username = name;
 		User user = db.getUserByName(name);
-		String adressString = "";
+		String address = "";
 		String birthdate = "";
 		String pincode = "";
 		if (user != null) {
-			Address address = user.getAddress();
-			adressString = address.getStreetName() + " " + address.getStreetNumber()
-					+ "\n" + address.getZipcode() + " " + address.getCityName();
+			 address = user.getAddress();
 			birthdate = user.getBirthDate();
 			pincode = user.getPincode();
 		}
@@ -54,7 +51,7 @@ public class UserProfileView extends JPanel {
 
 		// Adress Panel
 		JPanel adressPanel = new JPanel();
-		adressTextArea = new JTextArea(adressString, 3, 30);
+		adressTextArea = new JTextArea(address, 3, 30);
 		JLabel adressLabel = new JLabel("Adress");
 		adressPanel.add(adressLabel);
 		adressPanel.add(adressTextArea);
