@@ -33,9 +33,22 @@ public class Database {
         	}
 			return false;
 		}
+<<<<<<< HEAD
         
         public Bicycle getBicycleByID(String bicycleID) {
 			return bicycles.get(bicycleID);
+=======
+		return false;
+	}
+
+	public User getUserByName(String name) {
+		Iterator<User> itr = users.values().iterator();
+		while (itr.hasNext()) {
+			User temp = (User) itr.next();
+			if (temp.getName().equals(name)) {
+				return temp;
+			}
+>>>>>>> 568be2865ca0f5dfb1f4755bbb82fcf580c79a8d
 		}
         
         
@@ -49,8 +62,25 @@ public class Database {
         	//bind user till cyckel, adda cyckel till map.
         	return toAdd;
 		}
+<<<<<<< HEAD
         public void removeBicycle(Bicycle bicycle) {
         	bicycles.remove(bicycle.getID());
+=======
+		else{
+			JOptionPane
+			.showMessageDialog(null,
+					"No such pincode exists");
+		}
+	}
+
+	public void addUser(User user) {
+		if (getNumberOfUsers() >= MAX_USERS) {
+			JOptionPane
+					.showMessageDialog(null,
+							"Max amount of users has been registerd. Contact administration.");
+		} else {
+			users.put(user.getName(), user);
+>>>>>>> 568be2865ca0f5dfb1f4755bbb82fcf580c79a8d
 		}
         
         public boolean hasUserWithPin(String pincode) {
