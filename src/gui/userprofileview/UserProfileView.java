@@ -42,18 +42,19 @@ public class UserProfileView extends JPanel {
 		String birthdate = "";
 		String pincode = "";
 		JPanel bicycleButtons = new JPanel();
-		
+
 		if (user != null) {
 			address = user.getAddress();
 			birthdate = user.getBirthDate();
 			pincode = user.getPincode();
-			
+
 			// List of bicycles
 			for (String s : user.getBicycleIDs()) {
-				bicycleButtons.add(new JButtonBicycle(this, db.getBicycleByID(s)));
+				bicycleButtons.add(new JButtonBicycle(this, db
+						.getBicycleByID(s)));
 			}
 		} else {
-			user = new User("","","","");
+			user = new User("", "", "", "");
 		}
 		// Name Panel
 		JPanel namePanel = new JPanel();
@@ -83,8 +84,6 @@ public class UserProfileView extends JPanel {
 		pincodePanel.add(pincodeLabel);
 		pincodePanel.add(pincodeTextField);
 
-	
-		
 		// Button Panel
 		JPanel buttons = new JPanel();
 		JButtonAddBicycle addBicycle = new JButtonAddBicycle(this);
@@ -107,35 +106,40 @@ public class UserProfileView extends JPanel {
 	public void removeMe() {
 		tabbedPane.remove(this);
 	}
-	
+
 	public void saveUserToDatabase() {
-		String newPincode = pincodeTextField.toString();
-		if (newPincode.length() != BicycleGarageManager.PINCODE_SIZE || newPincode.matches("[0-9]+")) {
-			JOptionPane.showMessageDialog(null, "Pincode must be 6 digits long and contain only integers");
+		String newPincode = pincodeTextField.getText();
+		if (newPincode.length() != BicycleGarageManager.PINCODE_SIZE
+				|| !newPincode.matches("[0-9]+")) {
+			JOptionPane.showMessageDialog(null,
+					"Pincode must be 6 digits long and contain only integers");
+		} else {
+			String adress = adressTextArea.getText();
+			String birthDate = birthdateTextField.getText();
+			String name = nameTextField.getText();
+			if (adress != user.getAddress()) {
+				user.setAddress(adress);
+			}
+			if (birthDate != user.getBirthDate()) {
+				user.setBirthDate(birthDate);
+			}
+			if (name != user.getName()) {
+				user.setName(name);
+			}
+			if (newPincode != user.getPincode()) {
+				user.setPincode(newPincode);
+				db.updateUserPincode(user.getPincode(), newPincode);
+			}
+			db.addUser(user);
+			removeMe();
 		}
-		String adress = adressTextArea.toString();
-		String birthDate = birthdateTextField.toString();
-		String name = nameTextField.toString();
-		if (adress != user.getAddress()) {
-			user.setAddress(adress);
-		}
-		if (birthDate != user.getBirthDate()) {
-			user.setBirthDate(birthDate);
-		}
-		if (name != user.getName()) {
-			user.setName(name);
-		}
-		if (newPincode != user.getPincode()) {
-			user.setPincode(newPincode);
-			db.updateUserPincode(user.getPincode(), newPincode);
-		}				
-		removeMe();
+
 	}
 
 	public void createBicycleView(String bicycleID) {
 		tabbedPane.add(new BicycleView(bicycleID, db, printer));
 	}
-	
+
 	public void createNewBicycleView() {
 		Bicycle bicycle = db.newBicycle(user);
 		tabbedPane.add(new BicycleView(bicycle.getID(), db, printer));
