@@ -18,7 +18,9 @@ public class JButtonRemoveBicycle extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("Removing bicycle...");
-		Bicycle bicycle = db.getBicycleByID(bicycleID);
-		db.removeBicycle(bicycle);
+		if(db.hasBicycleWithID(bicycleID)) {
+			Bicycle bicycle = db.getBicycleByID(bicycleID);
+			db.removeBicycle(bicycle);
+		}
 	}
 }
