@@ -19,6 +19,7 @@ public class Database {
 	private final int MAX_USERS = 20000;
 	private Map<String, User> users;
 	private Map<String, Bicycle> bicycles;
+	private static int BicycleID = 10000;
 	
 	
         public Database() {
@@ -38,8 +39,15 @@ public class Database {
 		}
         
         
-        public void addBicycle(Bicycle bicycle) {
-        	bicycles.put(bicycle.getID(), bicycle);
+        public Bicycle addBicycle(User usr) {
+        	String nbr = Integer.toString(BicycleID);
+        	Bicycle toAdd = new Bicycle(nbr);
+        	usr.addBicycle(toAdd);
+        	bicycles.put(nbr, toAdd);
+        	BicycleID++;
+        	
+        	//bind user till cyckel, adda cyckel till map.
+        	return toAdd;
 		}
         public void removeBicycle(Bicycle bicycle) {
         	bicycles.remove(bicycle.getID());
@@ -50,12 +58,12 @@ public class Database {
 		}
         
         public User getUserByName(String name) {
-        	
-			return null;
+        	return null;
 		}
         
-        public void updateUserPincode() {
-        	
+        public void updateUserPincode(String newPincode, String oldPincode) {
+        	User temp = users.get(oldPincode);
+        	temp.setPincode(newPincode);
         }
         
         public void addUser(User user) {
@@ -63,7 +71,7 @@ public class Database {
         		JOptionPane.showMessageDialog(null, "Max amount of users has been registerd. Contact administration.");
         	}
         	else{
-        		
+        		users.put(user.getName(),user);
         	}
 		}
         
@@ -78,6 +86,8 @@ public class Database {
         public int getNumberOfUsers() {
 			return users.size();
 		}
+        
+      
         
         
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 /**
 * Main-method used to start the application.
 * @param args
@@ -15,6 +17,7 @@ public class User {
 	private String birthDate;
 	private String address;
 	private List<Bicycle> bicycleList;
+	private final int MAX_BICYCLES = 5;
 	
         public User(String pincode, String name, String birthDate, String address) {
         	this. pincode = pincode;
@@ -25,7 +28,12 @@ public class User {
 		}
         
         public void addBicycle(Bicycle bicycle) {
+        	if(bicycleList.size()>=5){
+        		JOptionPane.showMessageDialog(null, "Max amount of bicycles has been registerd.");
+        	}
+        	else{
         	bicycleList.add(bicycle);
+        	}
 		}
         public void removeBicycle(Bicycle bicycle) {
         	bicycleList.remove(bicycleList.indexOf(bicycle));
