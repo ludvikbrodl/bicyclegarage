@@ -63,7 +63,7 @@ public class Database {
 	}
 
 	public User getUserByName(String name) {
-		Iterator itr = users.entrySet().iterator();
+		Iterator<User> itr = users.values().iterator();
 		while (itr.hasNext()) {
 			User temp = (User) itr.next();
 			if (temp.getName().equals(name)) {
@@ -77,6 +77,11 @@ public class Database {
 		User temp = users.get(oldPincode);
 		if (temp != null) {
 			temp.setPincode(newPincode);
+		}
+		else{
+			JOptionPane
+			.showMessageDialog(null,
+					"No such pincode exists");
 		}
 	}
 
