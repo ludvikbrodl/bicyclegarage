@@ -39,7 +39,7 @@ public class Database {
 		}
         
         
-        public Bicycle addBicycle(User usr) {
+        public Bicycle newBicycle(User usr) {
         	String nbr = Integer.toString(BicycleID);
         	Bicycle toAdd = new Bicycle(nbr);
         	usr.addBicycle(toAdd);
