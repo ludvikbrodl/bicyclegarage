@@ -91,6 +91,7 @@ public class MainView extends JPanel {
 	}
 
 	public void shutdownGUI() {
+		db.saveToFile();
 		System.exit(0);
 	}
 
