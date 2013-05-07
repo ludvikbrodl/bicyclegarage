@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +11,7 @@ import javax.swing.JOptionPane;
 * Main-method used to start the application.
 * @param args
 */
-public class User {  
+public class User implements Serializable {  
 	
 	private String pincode;
 	private String name;
