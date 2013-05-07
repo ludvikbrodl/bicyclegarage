@@ -66,7 +66,24 @@ public class LundBicycleGarageManagerTest {
 		garageManager.entryBarcode("654321");
 		assertFalse(entryLock.isOpen());
 	}
-
+	
+	@Test
+	public void testEntryBarcodeFullGarage() {
+		for (int i = 0; i < 2000; i++) {
+			garageManager.entryBarcode(bicycleID);
+		}
+		try {
+			Thread.sleep(16000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertFalse(entryLock.isOpen());
+		garageManager.entryBarcode(bicycleID);
+		assertFalse(entryLock.isOpen());
+		assertTrue(terminal.greenIsOn());
+		assertTrue(terminal.redIsOn());
+	}
 	@Test
 	public void testExitBarcode() {
 		garageManager.exitBarcode(bicycleID);
@@ -91,6 +108,14 @@ public class LundBicycleGarageManagerTest {
 	@Test
 	public void testEntryCharacter2() {
 		for(char c: "654321".toCharArray()) {
+			garageManager.entryCharacter(c);
+		}
+		assertFalse(entryLock.isOpen());
+	}
+	
+	@Test
+	public void testEntryCharacterStar() {
+		for(char c: "12345*6".toCharArray()) {
 			garageManager.entryCharacter(c);
 		}
 		assertFalse(entryLock.isOpen());
