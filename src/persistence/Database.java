@@ -32,7 +32,7 @@ public class Database {
 	}
 
 	public boolean hasBicycleWithID(String bicycleID) {
-		if (users.containsKey(bicycleID)) {
+		if (bicycles.containsKey(bicycleID)) {
 			return true;
 		}
 		return false;
@@ -123,6 +123,14 @@ public class Database {
 		} catch (Exception E) {
 			E.printStackTrace();
 		}
+		
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream("BicycleID's"));
+			out.writeObject(BicycleID);
+		} catch (Exception E) {
+			E.printStackTrace();
+		}
 	}
 
 	public void readFromFile() {
@@ -141,6 +149,14 @@ public class Database {
 			bicycles = (HashMap<String, Bicycle>) in.readObject();
 		} catch (Exception e) {
 			users = new HashMap<String, User>();
+		}
+		
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+					"BicycleID's"));
+			BicycleID = (Integer)in.readObject();
+		} catch (Exception e) {
+			BicycleID = 10000;
 		}
 
 	}

@@ -6,6 +6,7 @@ package test;
 import static org.junit.Assert.*;
 
 import model.Bicycle;
+import model.User;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,6 +21,7 @@ import persistence.Database;
 public class DatabaseTest {
 
 	private Database db;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -36,20 +38,17 @@ public class DatabaseTest {
 		db = null;
 	}
 
-	/**
-	 * Test method for {@link persistence.Database#Database()}.
-	 */
-	@Test
-	public void testDatabase() {
-		fail("Not yet implemented");
-	}
+	
 
 	/**
 	 * Test method for {@link persistence.Database#hasBicycleWithID(java.lang.String)}.
 	 */
 	@Test
 	public void testHasBicycleWithID() {
-		fail("Not yet implemented");
+		User testUsr = new User("123456", "Pelle", "Norrborg", "110213");
+		db.addUser(testUsr);
+		db.newBicycle(testUsr);
+		assertTrue("Should have been true", db.hasBicycleWithID("10000"));
 	}
 
 	/**
