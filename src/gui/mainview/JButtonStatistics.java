@@ -15,7 +15,10 @@ public class JButtonStatistics extends JButton implements ActionListener{
 		this.panel = panel;
 		
 	}
-	@Override
+	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("Statistics");
 		panel.createStatisticsView();
