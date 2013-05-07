@@ -25,6 +25,7 @@ public class LundBicycleGarageManager implements BicycleGarageManager {
     	this.db = db;
     	this.statistics = statistics;
     	pincode = new StringBuilder();
+    	lastCharacterEntryTime = new Date();
 	}
 
 	@Override
@@ -79,7 +80,8 @@ public class LundBicycleGarageManager implements BicycleGarageManager {
 		} else {
 			pincode.append(c);
 			if(pincode.length() == PINCODE_SIZE) {
-				if(db.hasUserWithPin(pincode.toString())) {
+				String pincodeStr = pincode.toString();
+				if(db.hasUserWithPin(pincodeStr)) {
 					entryLock.open(OPEN_DOOR_TIME);
 				} else {
 					terminal.lightLED(PinCodeTerminal.RED_LED, 3);

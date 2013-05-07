@@ -31,6 +31,7 @@ public class LundBicycleGarageManagerTest {
 		db = new Database();
 		pincode = "123456";
 		User user = new User(pincode, "kalle", "930110", "magistratsv. 44");
+		db.addUser(user);
 		Bicycle bicycle = db.newBicycle(user);
 		bicycleID = bicycle.getID();
 		Statistics statistics = new Statistics(db);
@@ -59,12 +60,24 @@ public class LundBicycleGarageManagerTest {
 		assertTrue(db.getBicycleByID(bicycleID).isInGarage());
 		assertTrue(entryLock.isOpen());
 	}
+	
+	@Test
+	public void testEntryBarcode2() {
+		garageManager.entryBarcode("654321");
+		assertFalse(entryLock.isOpen());
+	}
 
 	@Test
 	public void testExitBarcode() {
 		garageManager.exitBarcode(bicycleID);
 		assertFalse(db.getBicycleByID(bicycleID).isInGarage());
 		assertTrue(exitLock.isOpen());
+	}
+	
+	@Test
+	public void testExitBarcode2() {
+		garageManager.exitBarcode("654321");
+		assertFalse(exitLock.isOpen());
 	}
 
 	@Test
@@ -73,6 +86,44 @@ public class LundBicycleGarageManagerTest {
 			garageManager.entryCharacter(c);
 		}
 		assertTrue(entryLock.isOpen());
+	}		
+	
+	@Test
+	public void testEntryCharacter2() {
+		for(char c: "654321".toCharArray()) {
+			garageManager.entryCharacter(c);
+		}
+		assertFalse(entryLock.isOpen());
+	}
+	
+	@Test
+	public void testPincodeTerminalTimeout() {
+		for(char c : "12345".toCharArray()) {
+			garageManager.entryCharacter(c);
+		}
+		try {
+			Thread.sleep(14000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		garageManager.entryCharacter('6');
+		assertTrue(entryLock.isOpen());
+	}	
+	
+	@Test
+	public void testPincodeTerminalTimeout2() {
+		for(char c : "12345".toCharArray()) {
+			garageManager.entryCharacter(c);
+		}
+		try {
+			Thread.sleep(16000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		garageManager.entryCharacter('6');
+		assertFalse(entryLock.isOpen());
 	}
 
 }
