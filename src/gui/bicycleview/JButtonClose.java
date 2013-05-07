@@ -8,18 +8,17 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class JButtonClose extends JButton implements ActionListener{
-	private JTabbedPane pane;
+	private BicycleView parent;
 	
-	public JButtonClose(JTabbedPane pane) {
+	public JButtonClose(BicycleView parent) {
 		super("Close");
 		addActionListener(this);
-		this.pane = pane;
+		this.parent = parent;
 		
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		pane.remove(this.getParent().getParent());
-		System.out.println("Close");
+		parent.removeMe();
 	}
 
 }

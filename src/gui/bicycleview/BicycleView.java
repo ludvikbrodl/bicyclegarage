@@ -14,11 +14,12 @@ public class BicycleView extends JPanel {
 	
 	private JLabel bicycleStatusLabel;
 	private Bicycle bicycle;
+	private JTabbedPane tabbedPane;
 	public BicycleView(String bicycleID, Database db, BarcodePrinter printer,
 			JTabbedPane tabbedPane){
 				super();
 		setLayout(new GridLayout(3, 0));
-		
+		this.tabbedPane = tabbedPane;
 		// Bicycle ID Panel
 		JPanel bicycleIDPanel = new JPanel();
 		JLabel bicycleIDEtiquette = new JLabel("Barcode:");
@@ -46,8 +47,8 @@ public class BicycleView extends JPanel {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(new JButtonPrint(bicycleID, printer));
 		buttonPanel.add(new JButtonChangeStatus(this));
-		buttonPanel.add(new JButtonRemoveBicycle(bicycleID, db));
-		buttonPanel.add(new JButtonClose(tabbedPane));
+		buttonPanel.add(new JButtonRemoveBicycle(bicycleID, db, this));
+		buttonPanel.add(new JButtonClose(this));
 			
 		add(bicycleIDPanel);
 		add(bicycleStatusPanel);
@@ -63,5 +64,9 @@ public class BicycleView extends JPanel {
 				bicycleStatusLabel.setText("In garage");
 			}
 		}
+	}
+	
+	void removeMe() {
+		tabbedPane.remove(this);
 	}
 }
