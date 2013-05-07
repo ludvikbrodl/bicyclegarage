@@ -15,7 +15,7 @@ public class BicycleView extends JPanel {
 	private JLabel bicycleStatusLabel;
 	private Bicycle bicycle;
 	private JTabbedPane tabbedPane;
-	public BicycleView(String bicycleID, Database db, BarcodePrinter printer,
+	public BicycleView(User user, String bicycleID, Database db, BarcodePrinter printer,
 			JTabbedPane tabbedPane){
 				super();
 		setLayout(new GridLayout(3, 0));
@@ -47,7 +47,7 @@ public class BicycleView extends JPanel {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(new JButtonPrint(bicycleID, printer));
 		buttonPanel.add(new JButtonChangeStatus(this));
-		buttonPanel.add(new JButtonRemoveBicycle(bicycleID, db, this));
+		buttonPanel.add(new JButtonRemoveBicycle(user, bicycleID, db, this));
 		buttonPanel.add(new JButtonClose(this));
 			
 		add(bicycleIDPanel);

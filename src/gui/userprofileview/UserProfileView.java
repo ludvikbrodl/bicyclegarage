@@ -149,13 +149,13 @@ public class UserProfileView extends JPanel {
 	 * @param bicycleID
 	 */
 	public void createBicycleView(String bicycleID) {
-		tabbedPane.add(new BicycleView(bicycleID, db, printer, tabbedPane));
+		tabbedPane.add(new BicycleView(user, bicycleID, db, printer, tabbedPane));
 		setFocusToNewTab();
 	}
 
 	public void createNewBicycleView() {
 		Bicycle bicycle = db.newBicycle(user);
-		tabbedPane.add(new BicycleView(bicycle.getID(), db, printer, tabbedPane));
+		tabbedPane.add(new BicycleView(user, bicycle.getID(), db, printer, tabbedPane));
 		setFocusToNewTab();
 	}
 }
