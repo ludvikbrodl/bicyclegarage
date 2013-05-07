@@ -57,4 +57,7 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 					"open in ElectronicLockTestDriver");
 		}
 	}
+	public boolean isOpen() {
+		return state.getText().equals("OPEN");
+	}
 }

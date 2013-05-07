@@ -22,9 +22,10 @@ public class LundBicycleGarageManagerTest {
 	private LundBicycleGarageManager garageManager;
 	private String pincode;
 	private String bicycleID;
-	private BarcodeReaderEntryTestDriver barcodeEntry;
 	private BarcodeReaderExitTestDriver barcodeExit;	
-
+	private ElectronicLockTestDriver entryLock; 
+	private ElectronicLockTestDriver exitLock; 
+	private PinCodeTerminalTestDriver terminal;
 	@Before
 	public void setUp() throws Exception {
 		db = new Database();
@@ -33,14 +34,14 @@ public class LundBicycleGarageManagerTest {
 		Bicycle bicycle = db.newBicycle(user);
 		bicycleID = bicycle.getID();
 		Statistics statistics = new Statistics(db);
-		barcodeEntry = new BarcodeReaderEntryTestDriver();
+		BarcodeReaderEntryTestDriver barcodeEntry = new BarcodeReaderEntryTestDriver();
 		barcodeEntry.register(garageManager);
-		barcodeExit = new BarcodeReaderExitTestDriver();
+		BarcodeReaderExitTestDriver barcodeExit = new BarcodeReaderExitTestDriver();
 		barcodeExit.register(garageManager);
 		BarcodePrinter printer = new BarcodePrinterTestDriver();
-		ElectronicLock entryLock = new ElectronicLockTestDriver("Entry");
-		ElectronicLock exitLock = new ElectronicLockTestDriver("Exit");
-		PinCodeTerminal terminal = new PinCodeTerminalTestDriver();
+		entryLock = new ElectronicLockTestDriver("Entry");
+		exitLock = new ElectronicLockTestDriver("Exit");
+		terminal = new PinCodeTerminalTestDriver();
 		garageManager = new LundBicycleGarageManager(db, statistics);
 		garageManager.registerHardwareDrivers(printer, entryLock, exitLock, terminal);
 		
@@ -54,17 +55,24 @@ public class LundBicycleGarageManagerTest {
 
 	@Test
 	public void testEntryBarcode() {
-		barcodeEntry.informManager(bicycleID);
+		garageManager.entryBarcode(bicycleID);
+		assertTrue(db.getBicycleByID(bicycleID).isInGarage());
+		assertTrue(entryLock.isOpen());
 	}
 
 	@Test
 	public void testExitBarcode() {
-		barcodeExit.informManager(bicycleID);
+		garageManager.exitBarcode(bicycleID);
+		assertFalse(db.getBicycleByID(bicycleID).isInGarage());
+		assertTrue(exitLock.isOpen());
 	}
 
 	@Test
 	public void testEntryCharacter() {
-		fail("Not yet implemented");
+		for(char c: pincode.toCharArray()) {
+			garageManager.entryCharacter(c);
+		}
+		assertTrue(entryLock.isOpen());
 	}
 
 }

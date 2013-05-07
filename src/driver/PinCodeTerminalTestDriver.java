@@ -56,7 +56,13 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 					"in PinCodeTerminalTestDriver");	
 		}
 	}
+	public boolean greenIsOn() {
+		return greenLabel.getText().equals("GREEN");
+	}
 	
+	public boolean redIsOn() {
+		return redLabel.getText().equals("RED");
+	}
 	/** 
 	 * Create a PinCodeTestDriver.
 	 */
