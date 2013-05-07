@@ -21,6 +21,7 @@ import persistence.Database;
 public class DatabaseTest {
 
 	private Database db;
+	private User testUsr;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -28,6 +29,7 @@ public class DatabaseTest {
 	@Before
 	public void setUp() throws Exception {
 		db = new Database();
+		testUsr = new User("123456", "Pelle", "Norrborg", "110213");
 	}
 
 	/**
@@ -36,6 +38,7 @@ public class DatabaseTest {
 	@After
 	public void tearDown() throws Exception {
 		db = null;
+		testUsr = null;
 	}
 
 	
@@ -45,7 +48,7 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testHasBicycleWithID() {
-		User testUsr = new User("123456", "Pelle", "Norrborg", "110213");
+		
 		db.addUser(testUsr);
 		db.newBicycle(testUsr);
 		assertTrue("Should have been true", db.hasBicycleWithID("10000"));
@@ -56,7 +59,13 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testGetBicycleByID() {
-		fail("Not yet implemented");
+		db.addUser(testUsr);
+		db.newBicycle(testUsr);
+		boolean check = false;
+		if(db.getBicycleByID("10001").equals(new Bicycle("10001"))){
+			check = true;
+		}
+		assertTrue("Bicycles did not match",check);
 	}
 
 	/**
