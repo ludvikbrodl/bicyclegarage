@@ -140,16 +140,22 @@ public class UserProfileView extends JPanel {
 		}
 
 	}
+	
+	public void setFocusToNewTab() {
+		tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
+	}
 
 	/**
 	 * @param bicycleID
 	 */
 	public void createBicycleView(String bicycleID) {
 		tabbedPane.add(new BicycleView(bicycleID, db, printer));
+		setFocusToNewTab();
 	}
 
 	public void createNewBicycleView() {
 		Bicycle bicycle = db.newBicycle(user);
 		tabbedPane.add(new BicycleView(bicycle.getID(), db, printer));
+		setFocusToNewTab();
 	}
 }
