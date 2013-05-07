@@ -15,7 +15,7 @@ import org.junit.Test;
 import persistence.Database;
 
 /**
- * @author axel
+ * @author Kasper
  *
  */
 public class DatabaseTest {
@@ -30,6 +30,7 @@ public class DatabaseTest {
 	public void setUp() throws Exception {
 		db = new Database();
 		testUsr = new User("123456", "Pelle", "Norrborg", "110213");
+		db.addUser(testUsr);
 	}
 
 	/**
@@ -48,8 +49,7 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testHasBicycleWithID() {
-		
-		db.addUser(testUsr);
+	
 		db.newBicycle(testUsr);
 		assertTrue("Should have been true", db.hasBicycleWithID("10000"));
 	}
@@ -59,7 +59,7 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testGetBicycleByID() {
-		db.addUser(testUsr);
+	
 		Bicycle b = db.newBicycle(testUsr);
 		assertEquals("Bicycles did not match",db.getBicycleByID("10001"), b);
 	}
@@ -79,7 +79,7 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testRemoveBicycle() {
-		db.addUser(testUsr);
+	
 		db.newBicycle(testUsr);
 		assertTrue("Bicycle was not added", db.hasBicycleWithID("10002"));
 		db.removeBicycle(db.getBicycleByID("10002"));
@@ -91,7 +91,7 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testHasUserWithPin() {
-		db.addUser(testUsr);
+		
 		assertTrue("List did not contain requested pin", db.hasUserWithPin("123456"));
 	}
 
@@ -100,7 +100,7 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testGetUserByName() {
-		db.addUser(testUsr);
+	
 		assertEquals("Users didn't match", testUsr, db.getUserByName("Pelle"));
 	}
 
@@ -117,7 +117,7 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testRemoveUser() {
-		db.addUser(testUsr);
+		
 		assertTrue("Was not true",db.hasUserWithPin("123456"));
 		db.removeUser(testUsr);
 		assertFalse("Was not false",db.hasUserWithPin("123456"));
@@ -128,7 +128,7 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testGetNumberOfBicycles() {
-		db.addUser(testUsr);
+	
 		db.newBicycle(testUsr);
 		assertEquals("Was not 1", 1, db.getNumberOfBicycles());
 		db.newBicycle(testUsr);
@@ -140,10 +140,21 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testGetNumberOfUsers() {
-		db.addUser(testUsr);
+		
 		assertEquals("Was not 1", 1, db.getNumberOfUsers());
 		db.addUser(new User("test", "test", "test", "test"));
 		assertEquals("Was not 2", 2, db.getNumberOfUsers());
+	}
+	
+	@Test
+	public void testReadWrite(){
+		db.newBicycle(testUsr);
+		db.saveToFile();
+		db = new Database();
+		db.readFromFile();
+		assertTrue("Should have been true", db.hasBicycleWithID("10003"));
+		assertTrue("List did not contain requested pin", db.hasUserWithPin("123456"));
+		
 	}
 	
 }

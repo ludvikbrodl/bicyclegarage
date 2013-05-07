@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,7 +20,7 @@ import model.User;
  * @param args
  */
 
-public class Database {
+public class Database implements Serializable{
 
 	private static int BicycleID = 10000;
 	private final int MAX_USERS = 20000;
