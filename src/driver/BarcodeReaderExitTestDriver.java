@@ -19,7 +19,7 @@ public class BarcodeReaderExitTestDriver extends BarcodeReaderTestDriver {
 	 * Implementation of abstract method informManager.
 	 * @see abstract class BarcodeReaderTestDriver
 	 */
-	void informManager(String code) {
+	public void informManager(String code) {
 		manager.exitBarcode(code);
 	}
 
