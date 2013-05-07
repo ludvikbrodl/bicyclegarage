@@ -16,12 +16,15 @@ public class Statistics {
 	private Database db;
 	private int month;
 	private Calendar calendar;
+	
 	public Statistics(Database database) {
 		calendar = new GregorianCalendar();
 		month = calendar.get(Calendar.MONTH);
 		bicyclesPerMonth = new ArrayList<Integer>();
 		db = database; 
+		bicyclesInGarage = 0;
 	}
+	
 	public void incrementBicyclesInGarage(){
 		bicyclesInGarage++;
 		incrementNumberOfBicyclesThisMonth();
@@ -39,7 +42,9 @@ public class Statistics {
     	
 	}
     public void decrementBicyclesInGarage() {
+    	if(bicyclesInGarage != 0){
     	bicyclesInGarage--;
+    	}
     }
     public List<Integer> getNumberOfEntriesPerMonth() {
 		return bicyclesPerMonth;
@@ -53,4 +58,11 @@ public class Statistics {
     public int getBicycleInGarage(){
     	return bicyclesInGarage;
     }
+    public void saveToFile() {
+    	
+    }
+	public void readFromFile() {
+		
+	}
+    
 }
