@@ -24,6 +24,11 @@ import persistence.Statistics;
 import model.BarcodePrinter;
 import model.Bicycle;
 
+/**
+ * 
+ * @author bas11lbr
+ *
+ */
 public class MainView extends JPanel {
 
 	public static final String NAME = "Main View";
