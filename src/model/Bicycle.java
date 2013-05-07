@@ -1,9 +1,12 @@
 package model;
+
+import java.io.Serializable;
+
 /**
 * Main-method used to start the application.
 * @param args
 */
-public class Bicycle {  
+public class Bicycle implements Serializable {
 	
 	private String bicycleID;
 	private boolean inGarage;

@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import model.BarcodePrinter;
 import model.Bicycle;
+import model.User;
 import persistence.Database;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
