@@ -18,13 +18,16 @@ import persistence.Statistics;
 
 import model.BarcodePrinter;
 import model.Bicycle;
+
 /**
- * MAIN CLASS
- * @author bas11lbr
+ * Main class to start the program.
  *
  */
 public class GUI {
 
+	/** Initialization
+	 * @param args not used
+	 */
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Bicycle Garage Manager");
 		frame.setSize(new Dimension(600, 600));

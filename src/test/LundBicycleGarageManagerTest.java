@@ -8,8 +8,11 @@ import org.junit.Test;
 
 import model.BarcodePrinter;
 import model.BarcodeReader;
+import model.Bicycle;
+import model.ElectronicLock;
 import model.LundBicycleGarageManager;
 import model.PinCodeTerminal;
+import model.User;
 import persistence.Database;
 import persistence.Statistics;
 import driver.*;
@@ -17,19 +20,29 @@ import driver.*;
 public class LundBicycleGarageManagerTest {
 	private Database db;
 	private LundBicycleGarageManager garageManager;
-	
+	private String pincode;
+	private String bicycleID;
+	private BarcodeReaderEntryTestDriver barcodeEntry;
+	private BarcodeReaderExitTestDriver barcodeExit;	
 
 	@Before
 	public void setUp() throws Exception {
 		db = new Database();
+		pincode = "123456";
+		User user = new User(pincode, "kalle", "930110", "magistratsv. 44");
+		Bicycle bicycle = db.newBicycle(user);
+		bicycleID = bicycle.getID();
 		Statistics statistics = new Statistics(db);
+		barcodeEntry = new BarcodeReaderEntryTestDriver();
+		barcodeEntry.register(garageManager);
+		barcodeExit = new BarcodeReaderExitTestDriver();
+		barcodeExit.register(garageManager);
+		BarcodePrinter printer = new BarcodePrinterTestDriver();
+		ElectronicLock entryLock = new ElectronicLockTestDriver("Entry");
+		ElectronicLock exitLock = new ElectronicLockTestDriver("Exit");
+		PinCodeTerminal terminal = new PinCodeTerminalTestDriver();
 		garageManager = new LundBicycleGarageManager(db, statistics);
-		BarcodeReader barcodeEntry = new BarcodeReaderEntryTestDriver();
-		BarcodePrinter barcodePrint = new BarcodePrinterTestDriver();
-		BarcodeReader barcodeExit = new BarcodeReaderExitTestDriver();
-	/**	BarcodeReader barcodeRead = new BarcodeReaderTestDriver();*/
-	/**	ElectronicLock electronikLock = new ElectronicLockTestDriver(Entry);*/
-		PinCodeTerminal pincodeTerminal = new PinCodeTerminalTestDriver();
+		garageManager.registerHardwareDrivers(printer, entryLock, exitLock, terminal);
 		
 	}
 
@@ -40,22 +53,13 @@ public class LundBicycleGarageManagerTest {
 	}
 
 	@Test
-	public void testRegisterHardwareDrivers() {
-		assertEquals("random text", "svar", "metod");
-		assertTrue("random text", true );/**metod elelr variabel som sak var true*/
-		/**assertSame(String, expected, actual);*/
-		/**assertNull([message], object)*/
-	}
-
-	@Test
 	public void testEntryBarcode() {
-		assertEquals("random text", "svar", "metod");
-		
+		barcodeEntry.informManager(bicycleID);
 	}
 
 	@Test
 	public void testExitBarcode() {
-		fail("Not yet implemented");
+		barcodeExit.informManager(bicycleID);
 	}
 
 	@Test

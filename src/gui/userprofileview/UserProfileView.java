@@ -18,6 +18,10 @@ import model.User;
 
 import persistence.Database;
 
+/**
+ * @author bas11lbr
+ *
+ */
 @SuppressWarnings("serial")
 public class UserProfileView extends JPanel {
 	public static final String NAME = "User Profile View";
@@ -137,6 +141,9 @@ public class UserProfileView extends JPanel {
 
 	}
 
+	/**
+	 * @param bicycleID
+	 */
 	public void createBicycleView(String bicycleID) {
 		tabbedPane.add(new BicycleView(bicycleID, db, printer));
 	}

@@ -30,5 +30,50 @@ public class StatisticsTest {
 		}
 		assertEquals(10, stats.getBicycleInGarage());
 	}
+	
+	@Test /** Testar getBicycleInGarage också */
+	public void testDecrementBicyclesInGarage() {
+		assertEquals(0, stats.getBicycleInGarage());
+		for (int i = 0; i < 10; i++) {
+			stats.incrementBicyclesInGarage();
+		}
+		
+		assertEquals(10, stats.getBicycleInGarage());
+		stats.decrementBicyclesInGarage();
+		assertEquals(9,stats.getBicycleInGarage());
+		
+		for(int i= 0 ; i< 9; i++){
+			stats.decrementBicyclesInGarage();
+		}
+		assertEquals(0, stats.getBicycleInGarage());
+		
+	}
+	@Test
+	public void testDecrementBicyclesInGarageWhenEmpty() {
+		stats.decrementBicyclesInGarage();
+		assertEquals(0,stats.getBicycleInGarage());
+	}
+	
+	@Test  /** hur !?!?!?!?!?!*/
+	public void testGetNumberOfEntriesPerMonth(){
+		
+	}
+	
+	@Test
+	public void testGetNumberOfBicycles(){
+		
+	}
+	
+	@Test
+	public void testGetNumberOfUsers(){
+		
+	}
+	
+	@Test
+    public void incrementNumberOfBicyclesThisMonth(){
+		
+	}
+	
+
 
 }
