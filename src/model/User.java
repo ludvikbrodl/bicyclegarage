@@ -36,7 +36,9 @@ public class User {
         	}
 		}
         public void removeBicycle(Bicycle bicycle) {
+        	if(bicycleList.indexOf(bicycle)!= -1){
         	bicycleList.remove(bicycleList.indexOf(bicycle));
+        	}
 		}
         
         public List<String> getBicycleIDs() {
