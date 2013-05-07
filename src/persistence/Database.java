@@ -91,12 +91,12 @@ public class Database {
 					.showMessageDialog(null,
 							"Max amount of users has been registerd. Contact administration.");
 		} else {
-			users.put(user.getName(), user);
+			users.put(user.getPincode(), user);
 		}
 	}
 
 	public void removeUser(User user) {
-		users.remove(user.getName());
+		users.remove(user.getPincode());
 	}
 
 	public int getNumberOfBicycles() {

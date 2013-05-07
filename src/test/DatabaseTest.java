@@ -60,27 +60,17 @@ public class DatabaseTest {
 	@Test
 	public void testGetBicycleByID() {
 		db.addUser(testUsr);
-		db.newBicycle(testUsr);
-		boolean check = false;
-		if(db.getBicycleByID("10001").equals(new Bicycle("10001"))){
-			check = true;
-		}
-		assertTrue("Bicycles did not match",check);
+		Bicycle b = db.newBicycle(testUsr);
+		assertEquals("Bicycles did not match",db.getBicycleByID("10001"), b);
 	}
 
-	/**
-	 * Test method for {@link persistence.Database#updateBicycleID(String, Bicycle)}.
-	 */
-	@Test
-	public void testUpdateBicycleID() {
-		fail("Not yet implemented");
-	}
+	
 
 	/**
 	 * Test method for {@link persistence.Database#addBicycle(Bicycle)}.
 	 */
 	@Test
-	public void testAddBicycle() {
+	public void testNewBicycle() {
 		fail("Not yet implemented");
 	}
 
@@ -89,7 +79,11 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testRemoveBicycle() {
-		fail("Not yet implemented");
+		db.addUser(testUsr);
+		db.newBicycle(testUsr);
+		assertTrue("Bicycle was not added", db.hasBicycleWithID("10002"));
+		db.removeBicycle(db.getBicycleByID("10002"));
+		assertFalse("Bicycle was not removed", db.hasBicycleWithID("10002"));
 	}
 
 	/**
@@ -97,7 +91,8 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testHasUserWithPin() {
-		fail("Not yet implemented");
+		db.addUser(testUsr);
+		assertTrue("List did not contain requested pin", db.hasUserWithPin("123456"));
 	}
 
 	/**
@@ -105,7 +100,8 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testGetUserByName() {
-		fail("Not yet implemented");
+		db.addUser(testUsr);
+		assertEquals("Users didn't match", testUsr, db.getUserByName("Pelle"));
 	}
 
 	/**
@@ -113,7 +109,7 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testAddUser() {
-		fail("Not yet implemented");
+			fail("Not yet implemented");
 	}
 
 	/**
@@ -121,7 +117,10 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testRemoveUser() {
-		fail("Not yet implemented");
+		db.addUser(testUsr);
+		assertTrue("Was not true",db.hasUserWithPin("123456"));
+		db.removeUser(testUsr);
+		assertFalse("Was not false",db.hasUserWithPin("123456"));
 	}
 
 	/**
@@ -129,7 +128,11 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testGetNumberOfBicycles() {
-		fail("Not yet implemented");
+		db.addUser(testUsr);
+		db.newBicycle(testUsr);
+		assertEquals("Was not 1", 1, db.getNumberOfBicycles());
+		db.newBicycle(testUsr);
+		assertEquals("Was not 2", 2, db.getNumberOfBicycles());
 	}
 
 	/**
@@ -137,7 +140,10 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testGetNumberOfUsers() {
-		fail("Not yet implemented");
+		db.addUser(testUsr);
+		assertEquals("Was not 1", 1, db.getNumberOfUsers());
+		db.addUser(new User("test", "test", "test", "test"));
+		assertEquals("Was not 2", 2, db.getNumberOfUsers());
 	}
 	
 }
