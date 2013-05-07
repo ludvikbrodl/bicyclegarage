@@ -24,7 +24,6 @@ import persistence.Database;
  */
 @SuppressWarnings("serial")
 public class UserProfileView extends JPanel {
-	public static final String NAME = "User Profile View";
 	private JTabbedPane tabbedPane;
 	private JTextField nameTextField;
 	private JTextArea adressTextArea;
@@ -149,13 +148,13 @@ public class UserProfileView extends JPanel {
 	 * @param bicycleID
 	 */
 	public void createBicycleView(String bicycleID) {
-		tabbedPane.add(new BicycleView(user, bicycleID, db, printer, tabbedPane));
+		tabbedPane.addTab("#"+bicycleID,new BicycleView(user, bicycleID, db, printer, tabbedPane));
 		setFocusToNewTab();
 	}
 
 	public void createNewBicycleView() {
 		Bicycle bicycle = db.newBicycle(user);
-		tabbedPane.add(new BicycleView(user, bicycle.getID(), db, printer, tabbedPane));
+		tabbedPane.addTab("#"+bicycle.getID(), new BicycleView(user, bicycle.getID(), db, printer, tabbedPane));
 		setFocusToNewTab();
 	}
 }

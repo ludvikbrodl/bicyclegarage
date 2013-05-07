@@ -12,7 +12,7 @@ public class JButtonBicycle extends JButton implements ActionListener{
 	private Bicycle bicycle;
 	
 	public JButtonBicycle(UserProfileView panel, Bicycle bicycle) {
-		super("Bicycle #" + bicycle);
+		super("Bicycle #" + bicycle.getID());
 		this.bicycle = bicycle;
 		addActionListener(this);
 		this.panel = panel;
