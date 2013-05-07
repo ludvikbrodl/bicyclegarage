@@ -31,14 +31,14 @@ public class BicycleView extends JPanel {
 		JLabel bicycleStatusEtiquette = new JLabel("Status:");
 		String bicycleStatus = "N/A";
 		if(db.hasBicycleWithID(bicycleID)) {
-			Bicycle bicycle = db.getBicycleByID(bicycleID);
+			bicycle = db.getBicycleByID(bicycleID);
 			if(bicycle.isInGarage()) {
 				bicycleStatus = "In garage";
 			} else {
 				bicycleStatus = "Out of garage";
 			}
 		}
-		JLabel bicycleStatusLabel = new JLabel(bicycleStatus);
+		bicycleStatusLabel = new JLabel(bicycleStatus);
 		bicycleStatusPanel.add(bicycleStatusEtiquette);
 		bicycleStatusPanel.add(bicycleStatusLabel);
 		
