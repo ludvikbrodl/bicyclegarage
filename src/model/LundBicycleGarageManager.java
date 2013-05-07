@@ -73,7 +73,7 @@ public class LundBicycleGarageManager implements BicycleGarageManager {
 	@Override
 	public void entryCharacter(char c) {
 		Date currentTime = new Date();
-		if(c == '*') {
+		if(c == CLEAR_ALL) {
 			pincode = new StringBuilder();
 		} else if(currentTime.getTime()-lastCharacterEntryTime.getTime() > TIMEOUT) {
 			pincode = new StringBuilder(c);
