@@ -78,7 +78,11 @@ public class Database implements Serializable{
 		if (users.containsKey(oldPincode) && !newPincode.equals(oldPincode)) {
 			User user = users.remove(oldPincode);
 			user.setPincode(newPincode);
-			addUser(user);
+			try {
+				addUser(user);
+			} catch (UserLimitException e) {
+				e.printStackTrace();
+			}
 		}
 		else{
 			JOptionPane
@@ -87,13 +91,11 @@ public class Database implements Serializable{
 		}
 	}
 
-	public void addUser(User user) {
-		if (getNumberOfUsers() >= MAX_USERS) {
-			JOptionPane
-					.showMessageDialog(null,
-							"Max amount of users has been registerd. Contact administration.");
-		} else {
+	public void addUser(User user) throws UserLimitException{
+		if (getNumberOfUsers() < MAX_USERS) {
 			users.put(user.getPincode(), user);
+		} else {
+			throw new UserLimitException();
 		}
 	}
 

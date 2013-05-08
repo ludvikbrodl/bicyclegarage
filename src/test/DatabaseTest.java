@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import persistence.Database;
+import persistence.UserLimitException;
 
 /**
  * @author Kasper
@@ -30,7 +31,11 @@ public class DatabaseTest {
 	public void setUp() throws Exception {
 		db = new Database();
 		testUsr = new User("123456", "Pelle", "Norrborg", "110213");
-		db.addUser(testUsr);
+		try {
+			db.addUser(testUsr);
+		} catch (UserLimitException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -109,7 +114,30 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testAddUser() {
-			fail("Not yet implemented");
+		int bsPin=100000;
+		for(int i=0;i<19999;i++) { //one user is already added at setup
+			try {
+				db.addUser(new User(Integer.toString(bsPin), "", "", ""));
+			} catch (UserLimitException e) {
+				System.out.println(bsPin);
+				e.printStackTrace();
+			}
+			bsPin++;
+		}
+		
+		boolean exceptionIsThrown = false;
+		try {
+			bsPin++;
+			db.addUser(new User(Integer.toString(bsPin), "", "", ""));
+		} catch(UserLimitException e) {
+			exceptionIsThrown = true;
+		} 
+		
+		if(exceptionIsThrown) {
+			assertTrue(true);
+		} else {
+			assertTrue(false);
+		}
 	}
 
 	/**
@@ -142,17 +170,21 @@ public class DatabaseTest {
 	public void testGetNumberOfUsers() {
 		
 		assertEquals("Was not 1", 1, db.getNumberOfUsers());
-		db.addUser(new User("test", "test", "test", "test"));
+		try {
+			db.addUser(new User("test", "test", "test", "test"));
+		} catch (UserLimitException e) {
+			e.printStackTrace();
+		}
 		assertEquals("Was not 2", 2, db.getNumberOfUsers());
 	}
 	
 	@Test
 	public void testReadWrite(){
-		db.newBicycle(testUsr);
+		Bicycle b = db.newBicycle(testUsr);
 		db.saveToFile();
 		db = new Database();
 		db.readFromFile();
-		assertTrue("Should have been true", db.hasBicycleWithID("10003"));
+		assertTrue("Should have been true", db.hasBicycleWithID(b.getID()));
 		assertTrue("List did not contain requested pin", db.hasUserWithPin("123456"));
 		
 	}

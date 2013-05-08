@@ -17,6 +17,7 @@ import model.BicycleGarageManager;
 import model.User;
 
 import persistence.Database;
+import persistence.UserLimitException;
 
 /**
  * @author bas11lbr
@@ -132,7 +133,13 @@ public class UserProfileView extends JPanel {
 			if (!newPincode.equals(user.getPincode())) {
 				if(user.getPincode().equals("")) {
 					user.setPincode(newPincode);
-					db.addUser(user);
+					try {
+						db.addUser(user);
+					} catch (UserLimitException e) {
+						JOptionPane.showMessageDialog(null, 
+								"Maximum user limit reached\n" +
+								" please contact the system owners for further instructions");
+					}
 				} else {
 					db.updateUserPincode(newPincode, user.getPincode());
 				}
