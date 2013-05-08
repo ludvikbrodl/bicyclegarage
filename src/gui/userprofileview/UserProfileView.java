@@ -120,21 +120,23 @@ public class UserProfileView extends JPanel {
 			String adress = adressTextArea.getText();
 			String birthDate = birthdateTextField.getText();
 			String name = nameTextField.getText();
-			if (adress != user.getAddress()) {
+			if (!adress.equals(user.getAddress())) {
 				user.setAddress(adress);
 			}
-			if (birthDate != user.getBirthDate()) {
+			if (!birthDate.equals(user.getBirthDate())) {
 				user.setBirthDate(birthDate);
 			}
-			if (name != user.getName()) {
+			if (!name.equals(user.getName())) {
 				user.setName(name);
 			}
-			if (newPincode != user.getPincode()) {
-				user.setPincode(newPincode);
+			if (!newPincode.equals(user.getPincode())) {
+				if(user.getPincode().equals("")) {
+					user.setPincode(newPincode);
+					db.addUser(user);
+				} else {
+					db.updateUserPincode(newPincode, user.getPincode());
+				}
 			}
-			if (!db.hasUserWithPin(newPincode)) {
-				db.addUser(user);
-			}	
 			removeMe();
 		}
 

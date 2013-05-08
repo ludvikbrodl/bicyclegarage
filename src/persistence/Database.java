@@ -75,9 +75,10 @@ public class Database implements Serializable{
 	}
 
 	public void updateUserPincode(String newPincode, String oldPincode) {
-		User temp = users.get(oldPincode);
-		if (temp != null) {
-			temp.setPincode(newPincode);
+		if (users.containsKey(oldPincode) && !newPincode.equals(oldPincode)) {
+			User user = users.remove(oldPincode);
+			user.setPincode(newPincode);
+			addUser(user);
 		}
 		else{
 			JOptionPane
