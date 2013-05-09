@@ -45,7 +45,7 @@ public class LundBicycleGarageManager implements BicycleGarageManager {
 	@Override
 	public void entryBarcode(String bicycleID) {
 		if(db.hasBicycleWithID(bicycleID)) {
-			if(statistics.getBicycleInGarage() < MAX_BICYCLES_IN_GARAGE) {
+			if(statistics.getBicyclesInGarage() < MAX_BICYCLES_IN_GARAGE) {
 				Bicycle bicycle = db.getBicycleByID(bicycleID);
 				entryLock.open(OPEN_DOOR_TIME);
 				bicycle.setInGarage(true);

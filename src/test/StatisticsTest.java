@@ -24,34 +24,34 @@ public class StatisticsTest {
 
 	@Test
 	public void testIncrementBicyclesInGarage() {
-		assertEquals(0, stats.getBicycleInGarage());
+		assertEquals(0, stats.getBicyclesInGarage());
 		for (int i = 0; i < 10; i++) {
 			stats.incrementBicyclesInGarage();
 		}
-		assertEquals(10, stats.getBicycleInGarage());
+		assertEquals(10, stats.getBicyclesInGarage());
 	}
 	
 	@Test /** Testar getBicycleInGarage också */
 	public void testDecrementBicyclesInGarage() {
-		assertEquals(0, stats.getBicycleInGarage());
+		assertEquals(0, stats.getBicyclesInGarage());
 		for (int i = 0; i < 10; i++) {
 			stats.incrementBicyclesInGarage();
 		}
 		
-		assertEquals(10, stats.getBicycleInGarage());
+		assertEquals(10, stats.getBicyclesInGarage());
 		stats.decrementBicyclesInGarage();
-		assertEquals(9,stats.getBicycleInGarage());
+		assertEquals(9,stats.getBicyclesInGarage());
 		
 		for(int i= 0 ; i< 9; i++){
 			stats.decrementBicyclesInGarage();
 		}
-		assertEquals(0, stats.getBicycleInGarage());
+		assertEquals(0, stats.getBicyclesInGarage());
 		
 	}
 	@Test
 	public void testDecrementBicyclesInGarageWhenEmpty() {
 		stats.decrementBicyclesInGarage();
-		assertEquals(0,stats.getBicycleInGarage());
+		assertEquals(0,stats.getBicyclesInGarage());
 	}
 	
 	@Test  /** hur !?!?!?!?!?!*/

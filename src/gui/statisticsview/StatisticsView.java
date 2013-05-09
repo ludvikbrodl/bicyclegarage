@@ -22,7 +22,7 @@ public class StatisticsView extends JPanel {
 		super();
 		
 		setLayout(new GridLayout(2, 0));
-		int bicyclesInGarage = statistics.getBicycleInGarage();
+		int bicyclesInGarage = statistics.getBicyclesInGarage();
 		int bicyclesTotal = statistics.getNumberOfBicycles();
 		int usersTotal = statistics.getNumberOfUsers();
 		List<Integer> entriesPerMonth = statistics.getNumberOfEntriesPerMonth();

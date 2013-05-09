@@ -95,7 +95,7 @@ public class Statistics {
      * Fetches the number of bicycles currently in the garage.
      * @return the number of bicycles currently in the garage 
      */
-    public int getBicycleInGarage(){
+    public int getBicyclesInGarage(){
     	return bicyclesInGarage;
     }
     
