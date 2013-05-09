@@ -6,7 +6,9 @@ import persistence.Database;
 import persistence.Statistics;
 
 /**
- *
+ * LundBicycleGarageManager manages the entry and exit locks as well as the pincode 
+ * terminal. It is responsible for authenticating users and bicycles that are
+ * trying to enter or exit the garage.
  */
 public class LundBicycleGarageManager implements BicycleGarageManager {  
 	BarcodePrinter printer;

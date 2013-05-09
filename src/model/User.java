@@ -20,7 +20,13 @@ public class User implements Serializable {
 	private String address;
 	private List<Bicycle> bicycleList;
 	private final int MAX_BICYCLES = 5;
-	
+		/**
+		 * Creates a new user.
+		 * @param pincode the user's pincode
+		 * @param name the user's name
+		 * @param birthDate the user's date of birth
+		 * @param address the user's address
+		 */
         public User(String pincode, String name, String birthDate, String address) {
         	this. pincode = pincode;
         	this.name = name;
