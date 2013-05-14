@@ -99,32 +99,4 @@ public class Statistics {
     	return bicyclesInGarage;
     }
     
-    /**
-     * Writes all statistics to the hard drive.
-     */
-    public void saveToFile() {    /** EJ KLAR! */
-    	PrintWriter pw= null;
-    	try{
-			 String filename = null;
-			pw = new PrintWriter(new File(filename));
-		}catch (FileNotFoundException e){
-			
-		}
-    	
-    }
-    
-    /**
-     * Retrieves all statistics from the hard drive.
-     */
-	public void readFromFile() {  /** EJ KLAR! */
-		Scanner	scan= null;
-		try{
-			 String filename = null;
-			scan = new Scanner(new File(filename));
-		}catch (FileNotFoundException e){
-			
-		}
-		
-	}
-    
 }
