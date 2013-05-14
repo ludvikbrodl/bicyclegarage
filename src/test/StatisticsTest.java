@@ -2,19 +2,25 @@ package test;
 
 import static org.junit.Assert.*;
 
+import model.Bicycle;
+import model.User;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import persistence.Database;
 import persistence.Statistics;
+import persistence.UserLimitException;
 
 public class StatisticsTest {
 	private Statistics stats;
+	private Database database;
 	@Before
 	public void setUp() throws Exception {
-		Database db = new Database();
-		stats = new Statistics(db);
+		database = new Database();
+		stats = new Statistics(database);
+		
 	}
 
 	@After
@@ -61,12 +67,32 @@ public class StatisticsTest {
 	
 	@Test
 	public void testGetNumberOfBicycles(){
+		User user = new User("pincode", "name", "birthDate", "address");
+		
+		try {
+			database.addUser(user);
+		} catch (UserLimitException e) {
+			
+		}
+		Bicycle bicycle = database.newBicycle(user);
+		assertEquals("hm",1,stats.getNumberOfBicycles());
+		database.removeBicycle(bicycle);
+		assertEquals("hm",0,stats.getNumberOfBicycles());
 		
 	}
 	
 	@Test
 	public void testGetNumberOfUsers(){
+		User user = new User("pincode", "name", "birthDate", "address");
 		
+		try {
+			database.addUser(user);
+		} catch (UserLimitException e) {
+			
+		}
+		assertEquals("hm",1,stats.getNumberOfUsers());
+		database.removeUser(user);
+		assertEquals("hm",0,stats.getNumberOfUsers());
 	}
 	
 	@Test
