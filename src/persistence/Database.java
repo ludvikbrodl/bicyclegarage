@@ -27,6 +27,7 @@ public class Database implements Serializable{
 	private Map<String, User> users;
 	private Map<String, Bicycle> bicycles;
 
+
 	/**
 	 * Creates a new empty database.
 	 */
@@ -46,6 +47,10 @@ public class Database implements Serializable{
 			return true;
 		}
 		return false;
+	}
+	
+	public int getNextPincode() {
+		return BicycleID + 100000; 
 	}
 	
 	/**
