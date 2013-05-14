@@ -76,7 +76,9 @@ public class DatabaseTest {
 	 */
 	@Test
 	public void testNewBicycle() {
-		fail("Not yet implemented");
+		Bicycle b = db.newBicycle(testUsr);
+		assertTrue(db.hasBicycleWithID(b.getID()));
+		assertTrue(testUsr.getBicycleIDs().contains(b.getID()));
 	}
 
 	/**
@@ -86,11 +88,20 @@ public class DatabaseTest {
 	public void testRemoveBicycle() {
 	
 		db.newBicycle(testUsr);
-		assertTrue("Bicycle was not added", db.hasBicycleWithID("10002"));
-		db.removeBicycle(db.getBicycleByID("10002"));
-		assertFalse("Bicycle was not removed", db.hasBicycleWithID("10002"));
+		assertTrue("Bicycle was not added", db.hasBicycleWithID("10003"));
+		db.removeBicycle(db.getBicycleByID("10003"));
+		assertFalse("Bicycle was not removed", db.hasBicycleWithID("10003"));
 	}
-
+	
+	@Test
+	public void testUpdateUserPincode() {
+		db.updateUserPincode("654321", testUsr.getPincode());
+		assertEquals("654321", testUsr.getPincode());
+		assertTrue(db.hasUserWithPin("654321"));
+		
+		db.updateUserPincode("234567", "785479");
+		assertFalse(db.hasUserWithPin("23456"));	
+	}
 	/**
 	 * Test method for {@link persistence.Database#hasUserWithPin(java.lang.String)}.
 	 */
