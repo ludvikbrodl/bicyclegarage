@@ -35,7 +35,10 @@ public class StatisticsTest {
 			stats.incrementBicyclesInGarage();
 		}
 		assertEquals(10, stats.getBicyclesInGarage());
+		int i = stats.getNumberOfEntriesPerMonth().get(0);
+		assertEquals(10,i);
 	}
+	
 	
 	@Test /** Testar getBicycleInGarage också */
 	public void testDecrementBicyclesInGarage() {
@@ -60,10 +63,6 @@ public class StatisticsTest {
 		assertEquals(0,stats.getBicyclesInGarage());
 	}
 	
-	@Test  /** hur !?!?!?!?!?!*/
-	public void testGetNumberOfEntriesPerMonth(){
-		
-	}
 	
 	@Test
 	public void testGetNumberOfBicycles(){
@@ -75,14 +74,15 @@ public class StatisticsTest {
 			
 		}
 		Bicycle bicycle = database.newBicycle(user);
-		assertEquals("hm",1,stats.getNumberOfBicycles());
+		assertEquals(1,stats.getNumberOfBicycles());
 		database.removeBicycle(bicycle);
-		assertEquals("hm",0,stats.getNumberOfBicycles());
+		assertEquals(0,stats.getNumberOfBicycles());
 		
 	}
 	
 	@Test
 	public void testGetNumberOfUsers(){
+		
 		User user = new User("pincode", "name", "birthDate", "address");
 		
 		try {
@@ -90,16 +90,9 @@ public class StatisticsTest {
 		} catch (UserLimitException e) {
 			
 		}
-		assertEquals("hm",1,stats.getNumberOfUsers());
+		assertEquals(1,stats.getNumberOfUsers());
 		database.removeUser(user);
-		assertEquals("hm",0,stats.getNumberOfUsers());
+		assertEquals(0,stats.getNumberOfUsers());
 	}
-	
-	@Test
-    public void incrementNumberOfBicyclesThisMonth(){
-		
-	}
-	
-
 
 }
