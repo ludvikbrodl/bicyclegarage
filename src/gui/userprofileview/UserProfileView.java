@@ -84,6 +84,8 @@ public class UserProfileView extends JPanel {
 		// Pincode Panel
 		JPanel pincodePanel = new JPanel();
 		pincodeTextField = new JTextField(pincode, 10);
+		pincodeTextField.setText(String.valueOf(db.getNextPincode()));
+		pincodeTextField.setEditable(false);
 		JLabel pincodeLabel = new JLabel("Pin Code");
 		pincodePanel.add(pincodeLabel);
 		pincodePanel.add(pincodeTextField);

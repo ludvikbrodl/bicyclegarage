@@ -23,7 +23,7 @@ import model.User;
 public class Database implements Serializable{
 
 	private static int BicycleID = 10000;
-	private final int MAX_USERS = 20000;
+	public static final int MAX_USERS = 20000;
 	private Map<String, User> users;
 	private Map<String, Bicycle> bicycles;
 
