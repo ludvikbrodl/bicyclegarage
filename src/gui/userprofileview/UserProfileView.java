@@ -3,6 +3,8 @@ package gui.userprofileview;
 import gui.bicycleview.BicycleView;
 
 import java.awt.GridLayout;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JLabel;
@@ -126,8 +128,18 @@ public class UserProfileView extends JPanel {
 	}
 	
 	public void removeUser() {
+		Iterator<String> itr = user.getBicycleIDs().iterator();
+		boolean anythingInGarage = false;
+		while(itr.hasNext()&&!anythingInGarage) {
+			Bicycle bicycle = db.getBicycleByID(itr.next());
+			anythingInGarage = bicycle.isInGarage();
+		}
+		if(anythingInGarage) {
+			JOptionPane.showMessageDialog(null, "please remove all bicycles from the garage and try again");
+		} else {
 		db.removeUser(user);
 		removeMe();
+		}
 	}
 	
 	private String getNewRandomPincode() {
