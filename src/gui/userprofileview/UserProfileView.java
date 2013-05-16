@@ -60,11 +60,11 @@ public class UserProfileView extends JPanel {
 						.getBicycleByID(s)));
 			}
 		} else {
-			String newPincode = getNewRandomPincode();
-			while(db.hasUserWithPin(newPincode)) {
-				newPincode = getNewRandomPincode();
+			pincode = getNewRandomPincode();
+			while(db.hasUserWithPin(pincode)) {
+				pincode = getNewRandomPincode();
 			}
-			user = new User(newPincode,"", "", "");
+			user = new User(pincode,"", "", "");
 			try {
 				db.addUser(user);
 			} catch (UserLimitException e) {
@@ -97,7 +97,6 @@ public class UserProfileView extends JPanel {
 		// Pincode Panel
 		JPanel pincodePanel = new JPanel();
 		pincodeTextField = new JTextField(pincode, 10);
-		pincodeTextField.setText(String.valueOf(db.getNextPincode()));
 		pincodeTextField.setEditable(false);
 		JLabel pincodeLabel = new JLabel("Pin Code");
 		pincodePanel.add(pincodeLabel);
