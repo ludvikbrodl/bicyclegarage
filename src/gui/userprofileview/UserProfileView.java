@@ -138,6 +138,11 @@ public class UserProfileView extends JPanel {
 			JOptionPane.showMessageDialog(null, "please remove all bicycles from the garage and try again");
 		} else {
 		db.removeUser(user);
+		itr = user.getBicycleIDs().iterator();
+		while(itr.hasNext()) {
+			Bicycle bicycle = db.getBicycleByID(itr.next());
+			db.removeBicycle(bicycle);
+		}	
 		removeMe();
 		}
 	}
