@@ -76,7 +76,7 @@ public class MainView extends JPanel {
 	
 	public void createUserProfileView() {
 		String name = nameTextField.getText();
-		if (name != "") {
+		if (!name.equals("")) {
 			if (db.getUserByName(name) != null) {
 				tabbedPane.addTab(name, new UserProfileView(tabbedPane, name, db, printer));
 				setFocusToNewTab();
