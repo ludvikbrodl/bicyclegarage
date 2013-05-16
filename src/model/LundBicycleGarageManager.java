@@ -88,6 +88,7 @@ public class LundBicycleGarageManager implements BicycleGarageManager {
 				} else {
 					terminal.lightLED(PinCodeTerminal.RED_LED, 3);
 				}
+				pincode = new StringBuilder(c);
 			}
 		}
 		lastCharacterEntryTime = currentTime;

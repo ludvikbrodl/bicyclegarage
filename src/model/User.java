@@ -38,12 +38,14 @@ public class User implements Serializable {
          * Associates the specified Bicycle with the user.
          * @param bicycle the bicycle to be added 
          */
-        public void addBicycle(Bicycle bicycle) {
+        public boolean addBicycle(Bicycle bicycle) {
         	if(bicycleList.size()>=5){
         		JOptionPane.showMessageDialog(null, "Max amount of bicycles has been registerd.");
+        		return false;
         	}
         	else{
         	bicycleList.add(bicycle);
+        	return true;
         	}
 		}
         /**
