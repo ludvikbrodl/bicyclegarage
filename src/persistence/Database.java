@@ -69,9 +69,10 @@ public class Database implements Serializable{
 	public Bicycle newBicycle(User usr) {
 		String id = codify(BicycleID);
 		Bicycle toAdd = new Bicycle(id);
-		usr.addBicycle(toAdd);
+		if(usr.addBicycle(toAdd)){
 		bicycles.put(id, toAdd);
 		BicycleID++;
+		}
 		return toAdd;
 	}
 	
