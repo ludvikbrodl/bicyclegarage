@@ -3,6 +3,7 @@ package gui.userprofileview;
 import gui.bicycleview.BicycleView;
 
 import java.awt.GridLayout;
+import java.util.Random;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,6 +26,7 @@ import persistence.UserLimitException;
  */
 @SuppressWarnings("serial")
 public class UserProfileView extends JPanel {
+	private Random random = new Random();
 	private JTabbedPane tabbedPane;
 	private JTextField nameTextField;
 	private JTextArea adressTextArea;
@@ -58,7 +60,18 @@ public class UserProfileView extends JPanel {
 						.getBicycleByID(s)));
 			}
 		} else {
-			user = new User("", "", "", "");
+			String newPincode = getNewRandomPincode();
+			while(db.hasUserWithPin(newPincode)) {
+				newPincode = getNewRandomPincode();
+			}
+			user = new User(newPincode,"", "", "");
+			try {
+				db.addUser(user);
+			} catch (UserLimitException e) {
+				JOptionPane.showMessageDialog(null, 
+						"Maximum user limit reached\n" +
+						" please contact the system owners for further instructions");
+			}
 		}
 		// Name Panel
 		JPanel namePanel = new JPanel();
@@ -112,43 +125,34 @@ public class UserProfileView extends JPanel {
 	public void removeMe() {
 		tabbedPane.remove(this);
 	}
-
-	public void saveUserToDatabase() {
-		String newPincode = pincodeTextField.getText();
-		if (newPincode.length() != BicycleGarageManager.PINCODE_SIZE
-				|| !newPincode.matches("[0-9]+")) {
-			JOptionPane.showMessageDialog(null,
-					"Pincode must be 6 digits long and contain only integers");
-		} else {
-			String adress = adressTextArea.getText();
-			String birthDate = birthdateTextField.getText();
-			String name = nameTextField.getText();
-			if (!adress.equals(user.getAddress())) {
-				user.setAddress(adress);
-			}
-			if (!birthDate.equals(user.getBirthDate())) {
-				user.setBirthDate(birthDate);
-			}
-			if (!name.equals(user.getName())) {
-				user.setName(name);
-			}
-			if (!newPincode.equals(user.getPincode())) {
-				if(user.getPincode().equals("")) {
-					user.setPincode(newPincode);
-					try {
-						db.addUser(user);
-					} catch (UserLimitException e) {
-						JOptionPane.showMessageDialog(null, 
-								"Maximum user limit reached\n" +
-								" please contact the system owners for further instructions");
-					}
-				} else {
-					db.updateUserPincode(newPincode, user.getPincode());
-				}
-			}
-			removeMe();
+	
+	private String getNewRandomPincode() {
+		int randomInt = random.nextInt((int)Math.pow(10, BicycleGarageManager.PINCODE_SIZE));
+		String pincode = codify(randomInt);
+		return pincode;
+	}
+	private String codify(int i) {
+		StringBuilder s = new StringBuilder(Integer.toString(i));
+		while (s.length() < 6) {
+			s.append("0");
 		}
-
+		return s.toString();
+	}
+	
+	public void saveUserToDatabase() {
+		String adress = adressTextArea.getText();
+		String birthDate = birthdateTextField.getText();
+		String name = nameTextField.getText();
+		if (!adress.equals(user.getAddress())) {
+			user.setAddress(adress);
+		}
+		if (!birthDate.equals(user.getBirthDate())) {
+			user.setBirthDate(birthDate);
+		}
+		if (!name.equals(user.getName())) {
+			user.setName(name);
+		}
+		removeMe();
 	}
 	
 	public void setFocusToNewTab() {
