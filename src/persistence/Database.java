@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import model.Bicycle;
+import model.BicycleGarageManager;
 import model.User;
 
 /**
@@ -22,7 +23,7 @@ import model.User;
 
 public class Database implements Serializable{
 
-	private static int BicycleID = 10000;
+	private static int BicycleID = 0;
 	public static final int MAX_USERS = 20000;
 	private Map<String, User> users;
 	private Map<String, Bicycle> bicycles;
@@ -49,10 +50,6 @@ public class Database implements Serializable{
 		return false;
 	}
 	
-	public int getNextPincode() {
-		return BicycleID + 100000; 
-	}
-	
 	/**
 	 * Fetches the bicycle corresponding to the specified id
 	 * 
@@ -70,13 +67,22 @@ public class Database implements Serializable{
 	 * @return the newly created bicycle
 	 */
 	public Bicycle newBicycle(User usr) {
-		String nbr = Integer.toString(BicycleID);
-		Bicycle toAdd = new Bicycle(nbr);
+		String id = codify(BicycleID);
+		Bicycle toAdd = new Bicycle(id);
 		usr.addBicycle(toAdd);
-		bicycles.put(nbr, toAdd);
+		bicycles.put(id, toAdd);
 		BicycleID++;
 		return toAdd;
 	}
+	
+	private String codify(int i) {
+		StringBuilder s = new StringBuilder(Integer.toString(i));
+		while (s.length() < 5) {
+			s.insert(0, '0');
+		}
+		return s.toString();
+	}
+	
 	/**
 	 * Removes the specified bicycle from the database.
 	 * CAUTION: this method does not dissociate the removed bicycle from its user,

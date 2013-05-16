@@ -56,7 +56,7 @@ public class DatabaseTest {
 	public void testHasBicycleWithID() {
 	
 		db.newBicycle(testUsr);
-		assertTrue("Should have been true", db.hasBicycleWithID("10000"));
+		assertTrue("Should have been true", db.hasBicycleWithID("00000"));
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class DatabaseTest {
 	public void testGetBicycleByID() {
 	
 		Bicycle b = db.newBicycle(testUsr);
-		assertEquals("Bicycles did not match",db.getBicycleByID("10001"), b);
+		assertEquals("Bicycles did not match",db.getBicycleByID("00001"), b);
 	}
 
 	
@@ -88,9 +88,9 @@ public class DatabaseTest {
 	public void testRemoveBicycle() {
 	
 		db.newBicycle(testUsr);
-		assertTrue("Bicycle was not added", db.hasBicycleWithID("10003"));
-		db.removeBicycle(db.getBicycleByID("10003"));
-		assertFalse("Bicycle was not removed", db.hasBicycleWithID("10003"));
+		assertTrue("Bicycle was not added", db.hasBicycleWithID("00003"));
+		db.removeBicycle(db.getBicycleByID("00003"));
+		assertFalse("Bicycle was not removed", db.hasBicycleWithID("00003"));
 	}
 	
 	@Test
