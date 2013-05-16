@@ -142,6 +142,10 @@ public class UserProfileView extends JPanel {
 		String adress = adressTextArea.getText();
 		String birthDate = birthdateTextField.getText();
 		String name = nameTextField.getText();
+		if(name.equals("")) {
+			JOptionPane.showMessageDialog(null, "please enter a name");
+			return;
+		}
 		if (!adress.equals(user.getAddress())) {
 			user.setAddress(adress);
 		}
