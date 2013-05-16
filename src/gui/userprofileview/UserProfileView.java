@@ -125,6 +125,11 @@ public class UserProfileView extends JPanel {
 		tabbedPane.remove(this);
 	}
 	
+	public void removeUser() {
+		db.removeUser(user);
+		removeMe();
+	}
+	
 	private String getNewRandomPincode() {
 		int randomInt = random.nextInt((int)Math.pow(10, BicycleGarageManager.PINCODE_SIZE));
 		String pincode = codify(randomInt);
