@@ -67,8 +67,10 @@ public class LundBicycleGarageManager implements BicycleGarageManager {
 		if(db.hasBicycleWithID(bicycleID)) {
 			Bicycle bicycle = db.getBicycleByID(bicycleID);
 			exitLock.open(OPEN_DOOR_TIME);
-			bicycle.setInGarage(false);
-			statistics.decrementBicyclesInGarage();
+			if (bicycle.isInGarage()){
+				bicycle.setInGarage(false);
+				statistics.decrementBicyclesInGarage();
+			}
 		} else {
 			terminal.lightLED(PinCodeTerminal.RED_LED, 3);
 		}
