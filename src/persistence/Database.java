@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,11 +25,10 @@ import model.User;
 
 public class Database implements Serializable{
 
-	private static int BicycleID = 0;
 	public static final int MAX_USERS = 20000;
 	private Map<String, User> users;
 	private Map<String, Bicycle> bicycles;
-
+	private List<String> availableBarcodes;
 
 	/**
 	 * Creates a new empty database.
@@ -35,6 +36,10 @@ public class Database implements Serializable{
 	public Database() {
 		bicycles = new HashMap<String, Bicycle>();
 		users = new HashMap<String, User>();
+		availableBarcodes = new ArrayList<String>();
+		for(int i=0;i<100000;i++) {
+			availableBarcodes.add(codify(i));
+		}
 	}
 
 	/**
@@ -67,11 +72,10 @@ public class Database implements Serializable{
 	 * @return the newly created bicycle
 	 */
 	public Bicycle newBicycle(User usr) {
-		String id = codify(BicycleID);
+		String id = getNextAvailableID();
 		Bicycle toAdd = new Bicycle(id);
 		if(usr.addBicycle(toAdd)){
 		bicycles.put(id, toAdd);
-		BicycleID++;
 		}
 		return toAdd;
 	}
@@ -84,6 +88,10 @@ public class Database implements Serializable{
 		return s.toString();
 	}
 	
+	private String getNextAvailableID() {
+		return availableBarcodes.remove(availableBarcodes.size()-1);
+	}
+	
 	/**
 	 * Removes the specified bicycle from the database.
 	 * CAUTION: this method does not dissociate the removed bicycle from its user,
@@ -92,7 +100,9 @@ public class Database implements Serializable{
 	 * @param bicycle the bicycle to be removed from the database
 	 */
 	public void removeBicycle(Bicycle bicycle) {
-		bicycles.remove(bicycle.getID());
+		String id = bicycle.getID();
+		bicycles.remove(id);
+		availableBarcodes.add(id);
 	}
 
 	public boolean hasUserWithPin(String pincode) {
@@ -206,7 +216,7 @@ public class Database implements Serializable{
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream("BicycleID's"));
-			out.writeObject(BicycleID);
+			out.writeObject(availableBarcodes);
 		} catch (Exception E) {
 			E.printStackTrace();
 		}
@@ -236,9 +246,9 @@ public class Database implements Serializable{
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
 					"BicycleID's"));
-			BicycleID = (Integer)in.readObject();
+			availableBarcodes = (List<String>)in.readObject();
 		} catch (Exception e) {
-			BicycleID = 10000;
+			System.err.println("all barcodes available");
 		}
 
 	}
