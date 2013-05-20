@@ -48,8 +48,10 @@ public class LundBicycleGarageManager implements BicycleGarageManager {
 			if(statistics.getBicyclesInGarage() < MAX_BICYCLES_IN_GARAGE) {
 				Bicycle bicycle = db.getBicycleByID(bicycleID);
 				entryLock.open(OPEN_DOOR_TIME);
-				bicycle.setInGarage(true);
-				statistics.incrementBicyclesInGarage();
+				if (!bicycle.isInGarage()){
+					bicycle.setInGarage(true);
+					statistics.incrementBicyclesInGarage();
+				}
 				
 			} else {
 				terminal.lightLED(PinCodeTerminal.RED_LED, 3);
