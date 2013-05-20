@@ -6,6 +6,8 @@ import model.BarcodePrinter;
 import model.Bicycle;
 import model.User;
 import persistence.Database;
+import persistence.Statistics;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -16,11 +18,13 @@ public class BicycleView extends JPanel {
 	private JLabel bicycleStatusLabel;
 	private Bicycle bicycle;
 	private JTabbedPane tabbedPane;
+	private Statistics statistics;
 	public BicycleView(User user, String bicycleID, Database db, BarcodePrinter printer,
-			JTabbedPane tabbedPane){
+			JTabbedPane tabbedPane, Statistics statistics){
 				super();
 		setLayout(new GridLayout(3, 0));
 		this.tabbedPane = tabbedPane;
+		this.statistics = statistics;
 		// Bicycle ID Panel
 		JPanel bicycleIDPanel = new JPanel();
 		JLabel bicycleIDEtiquette = new JLabel("Barcode:");
@@ -60,9 +64,11 @@ public class BicycleView extends JPanel {
 			if(bicycle.isInGarage()) {
 				bicycle.setInGarage(false);
 				bicycleStatusLabel.setText("Out of garage");
+				statistics.decrementBicyclesInGarage();
 			} else {
 				bicycle.setInGarage(true);
 				bicycleStatusLabel.setText("In garage");
+				statistics.incrementBicyclesInGarage();
 			}
 		}
 	}

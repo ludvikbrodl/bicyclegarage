@@ -78,7 +78,7 @@ public class MainView extends JPanel {
 		String name = nameTextField.getText();
 		if (!name.equals("")) {
 			if (db.getUserByName(name) != null) {
-				tabbedPane.addTab(name, new UserProfileView(tabbedPane, name, db, printer));
+				tabbedPane.addTab(name, new UserProfileView(tabbedPane, name, db, printer, stats));
 				setFocusToNewTab();
 			} else {
 				JOptionPane.showMessageDialog(null, "the user '"+name+"' could not be found");
@@ -86,7 +86,7 @@ public class MainView extends JPanel {
 		}
 	}
 	public void createEmptyUserProfileView() {
-		tabbedPane.addTab("New User", new UserProfileView(tabbedPane, "", db, printer));
+		tabbedPane.addTab("New User", new UserProfileView(tabbedPane, "", db, printer, stats));
 		setFocusToNewTab();
 	}
 

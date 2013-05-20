@@ -20,6 +20,7 @@ import model.BicycleGarageManager;
 import model.User;
 
 import persistence.Database;
+import persistence.Statistics;
 import persistence.UserLimitException;
 
 /**
@@ -37,14 +38,15 @@ public class UserProfileView extends JPanel {
 	private Database db;
 	private BarcodePrinter printer;
 	private User user;
-
+	private Statistics statistics;
 	public UserProfileView(JTabbedPane tabbedPane, String name, Database db,
-			BarcodePrinter printer) {
+			BarcodePrinter printer, Statistics statistics) {
 		super();
 		setLayout(new GridLayout(10, 0));
 		this.tabbedPane = tabbedPane;
 		this.printer = printer;
 		this.db = db;
+		this.statistics = statistics;
 		user = db.getUserByName(name);
 		String address = "";
 		String birthdate = "";
@@ -188,13 +190,13 @@ public class UserProfileView extends JPanel {
 	 * @param bicycleID
 	 */
 	public void createBicycleView(String bicycleID) {
-		tabbedPane.addTab("#"+bicycleID,new BicycleView(user, bicycleID, db, printer, tabbedPane));
+		tabbedPane.addTab("#"+bicycleID,new BicycleView(user, bicycleID, db, printer, tabbedPane, statistics));
 		setFocusToNewTab();
 	}
 
 	public void createNewBicycleView() {
 		Bicycle bicycle = db.newBicycle(user);
-		tabbedPane.addTab("#"+bicycle.getID(), new BicycleView(user, bicycle.getID(), db, printer, tabbedPane));
+		tabbedPane.addTab("#"+bicycle.getID(), new BicycleView(user, bicycle.getID(), db, printer, tabbedPane, statistics));
 		setFocusToNewTab();
 	}
 }
