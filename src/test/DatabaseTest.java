@@ -56,7 +56,7 @@ public class DatabaseTest {
 	public void testHasBicycleWithID() {
 	
 		db.newBicycle(testUsr);
-		assertTrue("Should have been true", db.hasBicycleWithID("00000"));
+		assertTrue("Should have been true", db.hasBicycleWithID("99999"));
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class DatabaseTest {
 	public void testGetBicycleByID() {
 	
 		Bicycle b = db.newBicycle(testUsr);
-		assertEquals("Bicycles did not match",db.getBicycleByID("00001"), b);
+		assertEquals("Bicycles did not match",db.getBicycleByID("99999"), b);
 	}
 
 	
@@ -88,9 +88,9 @@ public class DatabaseTest {
 	public void testRemoveBicycle() {
 	
 		db.newBicycle(testUsr);
-		assertTrue("Bicycle was not added", db.hasBicycleWithID("00003"));
-		db.removeBicycle(db.getBicycleByID("00003"));
-		assertFalse("Bicycle was not removed", db.hasBicycleWithID("00003"));
+		assertTrue("Bicycle was not added", db.hasBicycleWithID("99999"));
+		db.removeBicycle(db.getBicycleByID("99999"));
+		assertFalse("Bicycle was not removed", db.hasBicycleWithID("99999"));
 	}
 	
 	@Test
@@ -149,6 +149,28 @@ public class DatabaseTest {
 		} else {
 			assertTrue(false);
 		}
+	}
+	
+	@Test
+	public void testAddMaxBicycles() {
+			for (int j = 0; j < 5; j++) {
+				db.newBicycle(testUsr);
+			}
+		int bsPin=100000;
+		for(int i=0;i<19999;i++) { //one user is already added at setup
+			try {
+				User u = new User(Integer.toString(bsPin), "", "", "");
+				db.addUser(u);
+				for (int j = 0; j < 5; j++) {
+					db.newBicycle(u);
+				}
+			} catch (UserLimitException e) {
+				System.out.println(bsPin);
+				e.printStackTrace();
+			}
+			bsPin++;
+		}
+		assertEquals(100000, db.getNumberOfBicycles());
 	}
 
 	/**
