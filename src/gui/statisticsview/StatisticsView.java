@@ -32,15 +32,15 @@ public class StatisticsView extends JPanel {
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR);
 		for(int i=0;i<entriesPerMonth.size();i++) {
-			String monthName = monthNames[month]; 
-			int entriesThisMonth = entriesPerMonth.get(i);
-			labelPanel.add(new JLabel(monthName+" "+year+": " +entriesThisMonth));
 			if (month == 0){
 				month = 11;
 				year--;
 			} else {
 				month--;
 			}
+			String monthName = monthNames[month]; 
+			int entriesThisMonth = entriesPerMonth.get(i);
+			labelPanel.add(new JLabel(monthName+" "+year+": " +entriesThisMonth));
 		}
 		
 		labelPanel.add(new JLabel("Registered bicycles: "+bicyclesTotal));

@@ -47,7 +47,7 @@ public class Statistics {
 	}
 	
     private void incrementNumberOfBicyclesThisMonth() {
-    	int currentMonth = calendar.get(Calendar.MONTH);
+    	int currentMonth = new GregorianCalendar().get(Calendar.MONTH);
     	if( month != currentMonth){
     		month = currentMonth;
     		bicyclesPerMonth.add(entriesThisMonth);
